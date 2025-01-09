@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comics - Food Insecurity Stories</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        /* Base styles from main page */
+        :root {
+            --primary: #2D4B2D;
+            --secondary: #E6B89C;
+            --text: #333;
+            --background: #F9F5F2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--primary);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Comics Grid */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .comics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .comic-entry {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .comic-entry:hover {
+            transform: translateY(-5px);
+        }
+
+        .comic-entry img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .comic-info {
+            padding: 1.5rem;
+        }
+
+        .comic-info h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .comics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="comics.html">Comics</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div class="comics-grid">
+            <div class="comic-entry" data-aos="fade-up">
+                <img src="/api/placeholder/400/400" alt="Comic 1">
+                <div class="comic-info">
+                    <h2>The Daily Struggle</h2>
+                    <p>Following Sarah's journey to provide meals for her family during the dry season. A story of resilience and community support.</p>
+                    <div class="tags">
+                        <span class="tag">Personal Story</span>
+                        <span class="tag">Community</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comic-entry" data-aos="fade-up" data-aos-delay="100">
+                <img src="/api/placeholder/400/400" alt="Comic 2">
+                <div class="comic-info">
+                    <h2>Seeds of Change</h2>
+                    <p>Exploring innovative farming techniques that are helping communities achieve food security through sustainable practices.</p>
+                    <div class="tags">
+                        <span class="tag">Solutions</span>
+                        <span class="tag">Innovation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comic-entry" data-aos="fade-up" data-aos-delay="200">
+                <img src="/api/placeholder/400/400" alt="Comic 3">
+                <div class="comic-info">
+                    <h2>Market Day</h2>
+                    <p>A look at how local markets and trade networks play a crucial role in food distribution and community resilience.</p>
+                    <div class="tags">
+                        <span class="tag">Economy</span>
+                        <span class="tag">Culture</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+</html>
