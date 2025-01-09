@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Resources - Food Insecurity Comics</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        /* Inherit base styles from index.html */
+        :root {
+            --primary: #2D4B2D;
+            --secondary: #E6B89C;
+            --text: #333;
+            --background: #F9F5F2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        .nav {
+            background: var(--primary);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        /* Page-specific styles */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .resource-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .resource-info {
+            padding: 1.5rem;
+        }
+
+        .resource-info h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--secondary);
+        }
+
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 6rem 1rem 2rem;
+            }
+            
+            .filters {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="comics.html">Comics</a></li>
+            <li><a href="education.html">Education</a></li>
+            <li><a href="stories.html">Stories</a></li>
+            <li><a href="impact.html">Impact</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1 class="section-title">Educational Resources</h1>
+        
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All Resources</button>
+            <button class="filter-btn" data-filter="lesson">Lesson Plans</button>
+            <button class="filter-btn" data-filter="activity">Activities</button>
+            <button class="filter-btn" data-filter="guide">Teaching Guides</button>
+        </div>
+
+        <div class="resource-grid">
+            <div class="resource-card" data-aos="fade-up" data-category="lesson">
+                <img src="/api/placeholder/400/200" alt="Lesson Plan">
+                <div class="resource-info">
+                    <h3>Food Security Lesson Plan</h3>
+                    <p>A comprehensive lesson plan for teaching about food security issues in Uganda, suitable for grades 9-12.</p>
+                    <a href="#" class="download-btn">Download PDF</a>
+                </div>
+            </div>
+
+            <div class="resource-card" data-aos="fade-up" data-aos-delay="100" data-category="activity">
+                <img src="/api/placeholder/400/200" alt="Interactive Activity">
+                <div class="resource-info">
+                    <h3>Interactive Activities Pack</h3>
+                    <p>Hands-on activities to help students understand food systems and agricultural challenges.</p>
+                    <a href="#" class="download-btn">Download PDF</a>
+                </div>
+            </div>
+
+            <div class="resource-card" data-aos="fade-up" data-aos-delay="200" data-category="guide">
+                <img src="/api/placeholder/400/200" alt="Teaching Guide">
+                <div class="resource-info">
+                    <h3>Comic Discussion Guide</h3>
+                    <p>A guide for educators to facilitate meaningful discussions using our comics as teaching tools.</p>
+                    <a href="#" class="download-btn">Download PDF</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const resourceCards = document.querySelectorAll('.resource-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Filter resources
+                const filter = button.dataset.filter;
+                resourceCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Refresh AOS
+                AOS.refresh();
+            });
+        });
+    </script>
+</body>
+</html>
