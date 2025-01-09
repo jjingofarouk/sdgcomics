@@ -7,12 +7,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
-        /* Base styles from main page */
         :root {
             --primary: #2D4B2D;
             --secondary: #E6B89C;
             --text: #333;
             --background: #F9F5F2;
+            --overlay: rgba(0, 0, 0, 0.8);
         }
 
         * {
@@ -50,6 +50,57 @@
             color: white;
             text-decoration: none;
             font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--secondary);
+        }
+
+        /* Search and Filter Section */
+        .controls {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 25px;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--secondary);
+            color: var(--primary);
         }
 
         /* Comics Grid */
@@ -71,6 +122,7 @@
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .comic-entry:hover {
@@ -81,6 +133,11 @@
             width: 100%;
             height: 400px;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .comic-entry:hover img {
+            transform: scale(1.05);
         }
 
         .comic-info {
@@ -96,6 +153,7 @@
             display: flex;
             gap: 0.5rem;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .tag {
@@ -104,11 +162,119 @@
             padding: 0.25rem 0.75rem;
             border-radius: 15px;
             font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .modal img {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .modal-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .modal-nav button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .modal-nav button:hover {
+            background: var(--secondary);
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+
+        .loading::after {
+            content: "";
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--secondary);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: loading 0.75s ease infinite;
+        }
+
+        @keyframes loading {
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         @media (max-width: 768px) {
             .comics-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .modal {
+                padding: 1rem;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                padding: 1rem;
             }
         }
     </style>
@@ -123,10 +289,20 @@
         </ul>
     </nav>
 
+    <div class="controls">
+        <input type="text" class="search-box" placeholder="Search comics...">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="personal">Personal Stories</button>
+            <button class="filter-btn" data-filter="solutions">Solutions</button>
+            <button class="filter-btn" data-filter="culture">Culture</button>
+        </div>
+    </div>
+
     <div class="content">
         <div class="comics-grid">
-            <div class="comic-entry" data-aos="fade-up">
-                <img src="/api/placeholder/400/400" alt="Comic 1">
+            <div class="comic-entry" data-aos="fade-up" data-tags="personal,community">
+                <img src="/api/placeholder/400/400" alt="The Daily Struggle">
                 <div class="comic-info">
                     <h2>The Daily Struggle</h2>
                     <p>Following Sarah's journey to provide meals for her family during the dry season. A story of resilience and community support.</p>
@@ -137,8 +313,8 @@
                 </div>
             </div>
 
-            <div class="comic-entry" data-aos="fade-up" data-aos-delay="100">
-                <img src="/api/placeholder/400/400" alt="Comic 2">
+            <div class="comic-entry" data-aos="fade-up" data-aos-delay="100" data-tags="solutions,innovation">
+                <img src="/api/placeholder/400/400" alt="Seeds of Change">
                 <div class="comic-info">
                     <h2>Seeds of Change</h2>
                     <p>Exploring innovative farming techniques that are helping communities achieve food security through sustainable practices.</p>
@@ -149,8 +325,8 @@
                 </div>
             </div>
 
-            <div class="comic-entry" data-aos="fade-up" data-aos-delay="200">
-                <img src="/api/placeholder/400/400" alt="Comic 3">
+            <div class="comic-entry" data-aos="fade-up" data-aos-delay="200" data-tags="culture,economy">
+                <img src="/api/placeholder/400/400" alt="Market Day">
                 <div class="comic-info">
                     <h2>Market Day</h2>
                     <p>A look at how local markets and trade networks play a crucial role in food distribution and community resilience.</p>
@@ -160,14 +336,139 @@
                     </div>
                 </div>
             </div>
+
+            <div class="comic-entry" data-aos="fade-up" data-aos-delay="300" data-tags="personal,culture">
+                <img src="/api/placeholder/400/400" alt="Grandmother's Kitchen">
+                <div class="comic-info">
+                    <h2>Grandmother's Kitchen</h2>
+                    <p>A heartwarming tale of traditional cooking methods and the passing down of food security knowledge through generations.</p>
+                    <div class="tags">
+                        <span class="tag">Personal Story</span>
+                        <span class="tag">Culture</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comic-entry" data-aos="fade-up" data-aos-delay="400" data-tags="solutions,community">
+                <img src="/api/placeholder/400/400" alt="Community Garden">
+                <div class="comic-info">
+                    <h2>Community Garden</h2>
+                    <p>How a neighborhood transformed an empty lot into a thriving community garden, bringing fresh produce and hope to local families.</p>
+                    <div class="tags">
+                        <span class="tag">Solutions</span>
+                        <span class="tag">Community</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comic-entry" data-aos="fade-up" data-aos-delay="500" data-tags="innovation,solutions">
+                <img src="/api/placeholder/400/400" alt="Tech for Food">
+                <div class="comic-info">
+                    <h2>Tech for Food</h2>
+                    <p>Exploring how modern technology and mobile apps are helping farmers predict weather patterns and optimize crop yields.</p>
+                    <div class="tags">
+                        <span class="tag">Innovation</span>
+                        <span class="tag">Solutions</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <div class="modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <img src="" alt="">
+            <h2></h2>
+            <p></p>
+            <div class="tags"></div>
+            <div class="modal-nav">
+                <button class="prev-comic">Previous</button>
+                <button class="next-comic">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading"></div>
+
     <script>
+        // Initialize AOS
         AOS.init({
             duration: 800,
             once: true
         });
-    </script>
-</body>
-</html>
+
+        // DOM Elements
+        const comicsGrid = document.querySelector('.comics-grid');
+        const searchBox = document.querySelector('.search-box');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const modal = document.querySelector('.modal');
+        const modalContent = modal.querySelector('.modal-content');
+        const closeModal = modal.querySelector('.close-modal');
+        const prevButton = modal.querySelector('.prev-comic');
+        const nextButton = modal.querySelector('.next-comic');
+        const loading = document.querySelector('.loading');
+
+        let currentComicIndex = 0;
+        let visibleComics = [];
+
+        // Search functionality
+        searchBox.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            filterComics();
+        });
+
+        // Filter functionality
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                filterComics();
+            });
+        });
+
+        function filterComics() {
+            const searchTerm = searchBox.value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            
+            const comics = document.querySelectorAll('.comic-entry');
+            visibleComics = [];
+
+            comics.forEach(comic => {
+                const title = comic.querySelector('h2').textContent.toLowerCase();
+                const description = comic.querySelector('p').textContent.toLowerCase();
+                const tags = comic.dataset.tags;
+
+                const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+
+                if (matchesSearch && matchesFilter) {
+                    comic.style.display = 'block';
+                    visibleComics.push(comic);
+                } else {
+                    comic.style.display = 'none';
+                }
+            });
+
+            // Refresh AOS
+            AOS.refresh();
+        }
+
+        // Modal functionality
+        comicsGrid.addEventListener('click', (e) => {
+            const comic = e.target.closest('.comic-entry');
+            if (comic) {
+                currentComicIndex = visibleComics.indexOf(comic);
+                showModal(comic);
+            }
+        });
+
+        function showModal(comic) {
+            const img = comic.querySelector('img');
+            const title = comic.querySelector('h2');
+            const description = comic.querySelector('p');
+            const tags = comic.querySelector('.tags');
+
+            modal.querySelector('img').src = img.src;
+            modal.querySelector('h2').textContent = title.textContent;
+            modal.querySelector
