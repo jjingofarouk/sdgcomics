@@ -243,4 +243,97 @@
             <div class="timeline-entry" data-aos="fade-right">
                 <div class="timeline-date">2023</div>
                 <div class="timeline-content">
-                    <h3>Project Launch</h
+[Previous code remains the same until timeline-content...]
+
+                    <h3>Project Launch</h3>
+                    <p>Initiated our first series of comics addressing food insecurity in rural Uganda, partnering with local schools and community organizations.</p>
+                </div>
+            </div>
+
+            <div class="timeline-entry" data-aos="fade-left">
+                <div class="timeline-date">2024</div>
+                <div class="timeline-content">
+                    <h3>Educational Program</h3>
+                    <p>Launched comprehensive educational program reaching 50 schools across Uganda, with teacher training and resource materials.</p>
+                </div>
+            </div>
+
+            <div class="timeline-entry" data-aos="fade-right">
+                <div class="timeline-date">2024</div>
+                <div class="timeline-content">
+                    <h3>Community Impact</h3>
+                    <p>Established community workshops and training programs, leading to 15 local food security initiatives.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonials">
+            <h2 style="color: var(--primary); margin-bottom: 2rem;">Testimonials</h2>
+            
+            <div class="testimonial-card" data-aos="fade-up">
+                <div class="testimonial-header">
+                    <img src="/api/placeholder/60/60" alt="Teacher" class="testimonial-avatar">
+                    <div>
+                        <h3 class="testimonial-author">Sarah Namukasa</h3>
+                        <p>Teacher, Kampala Primary School</p>
+                    </div>
+                </div>
+                <p>"These comics have transformed how we teach about food security. Our students are more engaged and better understand the challenges their communities face."</p>
+            </div>
+
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="testimonial-header">
+                    <img src="/api/placeholder/60/60" alt="Community Leader" class="testimonial-avatar">
+                    <div>
+                        <h3 class="testimonial-author">John Mukasa</h3>
+                        <p>Community Leader</p>
+                    </div>
+                </div>
+                <p>"The visual storytelling approach has helped bridge communication gaps and inspire action in our community. We're seeing real changes in how people approach food security."</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Initialize CountUp for metrics
+        const metrics = [
+            { id: 'metric1', end: 50000 },
+            { id: 'metric2', end: 150 },
+            { id: 'metric3', end: 75 }
+        ];
+
+        const options = {
+            duration: 2.5,
+            useGrouping: true
+        };
+
+        // Start counting when element is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const metric = metrics.find(m => m.id === entry.target.id);
+                    if (metric) {
+                        const countUp = new CountUp(metric.id, metric.end, options);
+                        countUp.start();
+                        observer.unobserve(entry.target);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observe each metric
+        metrics.forEach(metric => {
+            const element = document.getElementById(metric.id);
+            if (element) {
+                observer.observe(element);
+            }
+        });
+    </script>
+</body>
+</html>
