@@ -28,29 +28,100 @@
             background: var(--background);
         }
 
-        /* Navigation */
-        .nav {
-            background: var(--primary);
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-        }
+/* Replace the existing .nav related CSS with this */
+.nav {
+    background: var(--primary);
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
 
-        .nav ul {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            list-style: none;
-        }
+.nav.hidden {
+    transform: translateY(-100%);
+}
 
-        .nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-        }
+.nav ul {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    padding: 0 1rem;
+    list-style: none;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.nav a:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    padding: 0.5rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+        z-index: 1001;
+    }
+
+    .nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: var(--primary);
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+        transition: right 0.3s ease;
+    }
+
+    .nav.active ul {
+        right: 0;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 6px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -5px);
+    }
+}
 
         /* Contact Form */
         .content {
@@ -125,14 +196,21 @@
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="comics.html">Comics</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
+<nav class="nav">
+    <button class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="comics.html">Comics</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="stories.html">Stories</a></li>
+    </ul>
+</nav>
 
     <div class="content">
         <div class="contact-form" data-aos="fade-up">
@@ -187,5 +265,7 @@
             once: true
         });
     </script>
+        <script src="script.js"></script> <!-- Path to script.js -->
+
     </body>
     </html>
