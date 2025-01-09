@@ -27,34 +27,44 @@
             color: var(--text);
             background: var(--background);
         }
+.nav {
+    background: var(--primary);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
 
-        .nav {
-            background: var(--primary);
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-        }
+.nav ul {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    padding: 0 1rem;
+    list-style: none;
+}
 
-        .nav ul {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            list-style: none;
-        }
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
 
-        .nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s ease;
-        }
+.nav a:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+}
 
-        .nav a:hover {
-            opacity: 0.8;
-        }
+@media (max-width: 768px) {
+    .nav ul {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}
 
         .hero {
             min-height: 100vh;
