@@ -1,0 +1,338 @@
+    <style>
+        :root {
+            --primary: #2D4B2D;
+            --secondary: #E6B89C;
+            --text: #333;
+            --background: #F9F5F2;
+            --overlay: rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+        }
+
+/* Replace the existing .nav related CSS with this */
+.nav {
+    background: var(--primary);
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.nav.hidden {
+    transform: translateY(-100%);
+}
+
+.nav ul {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    padding: 0 1rem;
+    list-style: none;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.nav a:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    padding: 0.5rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+        z-index: 1001;
+    }
+
+    .nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: var(--primary);
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+        transition: right 0.3s ease;
+    }
+
+    .nav.active ul {
+        right: 0;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 6px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -5px);
+    }
+}
+
+        /* Search and Filter Section */
+        .controls {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 25px;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        /* Comics Grid */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .comics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .comic-entry {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .comic-entry:hover {
+            transform: translateY(-5px);
+        }
+
+        .comic-entry img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .comic-entry:hover img {
+            transform: scale(1.05);
+        }
+
+        .comic-info {
+            padding: 1.5rem;
+        }
+
+        .comic-info h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .modal img {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .modal-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .modal-nav button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .modal-nav button:hover {
+            background: var(--secondary);
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+
+        .loading::after {
+            content: "";
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--secondary);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: loading 0.75s ease infinite;
+        }
+
+        @keyframes loading {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .comics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal {
+                padding: 1rem;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
