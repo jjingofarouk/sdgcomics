@@ -3,61 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comics - Food Insecurity Stories</title>
+    <title>Stories - Food Security Narratives from Uganda</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <link rel="stylesheet" href="css/comicstyles.css">
+    <style>
+        :root {
+            --primary-color: #2c5282;
+            --secondary-color: #4a5568;
+            --accent-color: #48bb78;
+            --background-color: #f7fafc;
+            --text-color: #2d3748;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
 
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .nav.hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 1rem;
+            justify-content: center;
+        }
+
+        .nav li {
+            margin: 0 1.5rem;
+        }
+
+        .nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .controls {
+            margin: 6rem auto 2rem;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            background-color: var(--secondary-color);
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background-color: var(--accent-color);
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .story-entry {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .story-entry:hover {
+            transform: translateY(-5px);
+        }
+
+        .story-header {
+            height: 200px;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .story-info {
+            padding: 1.5rem;
+        }
+
+        .story-info h2 {
+            margin: 0 0 1rem 0;
+            color: var(--primary-color);
+        }
+
+        .story-info p {
+            margin: 0 0 1rem 0;
+            line-height: 1.6;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary-color);
+        }
+
+        .modal-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .prev-story, .next-story {
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav li {
+                margin: 0.5rem 0;
+            }
+
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-<nav class="nav">
-    <button class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="comics.html">Comics</a></li>
-        <li><a href="stories.html">Stories</a></li>
-        <li><a href="impact.html">Impact</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
-</nav>
-
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="stories.html">Stories</a></li>
+            <li><a href="impact.html">Impact</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
 
     <div class="controls">
-        <input type="text" class="search-box" placeholder="Search comics...">
+        <input type="text" class="search-box" placeholder="Search stories...">
         <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="personal">Personal Stories</button>
-            <button class="filter-btn" data-filter="solutions">Solutions</button>
-            <button class="filter-btn" data-filter="culture">Culture</button>
+            <button class="filter-btn active" data-filter="all">All Stories</button>
+            <button class="filter-btn" data-filter="personal">Personal Narratives</button>
+            <button class="filter-btn" data-filter="solutions">Solutions & Innovation</button>
+            <button class="filter-btn" data-filter="culture">Cultural Impact</button>
         </div>
     </div>
 
     <div class="content">
-        <div class="comics-grid">
-            <div class="comic-entry" data-aos="fade-up" data-tags="personal,community">
-<img src="image (1).jpg" alt="The Daily Struggle">
-                <div class="comic-info">
-                    <h2>The Daily Struggle</h2>
-                    <p>Following Sarah's journey to provide meals for her family during the dry season. A story of resilience and community support.</p>
+        <div class="stories-grid">
+            <div class="story-entry" data-aos="fade-up" data-tags="personal,community">
+                <div class="story-header">
+                    <h2>The Harvest Keepers</h2>
+                </div>
+                <div class="story-info">
+                    <p>In the heart of Karamoja, Sarah Akello leads a women's cooperative transforming traditional storage methods into a sustainable food security solution. Her story captures the essence of community resilience and indigenous knowledge in addressing SDG 2.</p>
                     <div class="tags">
-                        <span class="tag">Personal Story</span>
-                        <span class="tag">Community</span>
+                        <span class="tag">Personal Narrative</span>
+                        <span class="tag">Community Action</span>
                     </div>
                 </div>
             </div>
 
-            <div class="comic-entry" data-aos="fade-up" data-aos-delay="100" data-tags="solutions,innovation">
-                <img src="/api/placeholder/400/400" alt="Seeds of Change">
-                <div class="comic-info">
-                    <h2>Seeds of Change</h2>
-                    <p>Exploring innovative farming techniques that are helping communities achieve food security through sustainable practices.</p>
+            <div class="story-entry" data-aos="fade-up" data-aos-delay="100" data-tags="solutions,innovation">
+                <div class="story-header">
+                    <h2>Digital Fields</h2>
+                </div>
+                <div class="story-info">
+                    <p>Following young entrepreneurs in Kampala who are revolutionizing urban farming through mobile technology. Their innovative approach to vertical farming and resource management is creating new possibilities for food security in urban spaces.</p>
                     <div class="tags">
                         <span class="tag">Solutions</span>
                         <span class="tag">Innovation</span>
@@ -65,50 +275,54 @@
                 </div>
             </div>
 
-            <div class="comic-entry" data-aos="fade-up" data-aos-delay="200" data-tags="culture,economy">
-                <img src="/api/placeholder/400/400" alt="Market Day">
-                <div class="comic-info">
-                    <h2>Market Day</h2>
-                    <p>A look at how local markets and trade networks play a crucial role in food distribution and community resilience.</p>
-                    <div class="tags">
-                        <span class="tag">Economy</span>
-                        <span class="tag">Culture</span>
-                    </div>
+            <div class="story-entry" data-aos="fade-up" data-aos-delay="200" data-tags="culture,community">
+                <div class="story-header">
+                    <h2>Seeds of Memory</h2>
                 </div>
-            </div>
-
-            <div class="comic-entry" data-aos="fade-up" data-aos-delay="300" data-tags="personal,culture">
-                <img src="/api/placeholder/400/400" alt="Grandmother's Kitchen">
-                <div class="comic-info">
-                    <h2>Grandmother's Kitchen</h2>
-                    <p>A heartwarming tale of traditional cooking methods and the passing down of food security knowledge through generations.</p>
+                <div class="story-info">
+                    <p>An exploration of how traditional seed banking in Western Uganda is preserving biodiversity and cultural heritage. Through the eyes of elder Mukasa John, we witness the intersection of indigenous knowledge and food sovereignty.</p>
                     <div class="tags">
-                        <span class="tag">Personal Story</span>
-                        <span class="tag">Culture</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="comic-entry" data-aos="fade-up" data-aos-delay="400" data-tags="solutions,community">
-                <img src="/api/placeholder/400/400" alt="Community Garden">
-                <div class="comic-info">
-                    <h2>Community Garden</h2>
-                    <p>How a neighborhood transformed an empty lot into a thriving community garden, bringing fresh produce and hope to local families.</p>
-                    <div class="tags">
-                        <span class="tag">Solutions</span>
+                        <span class="tag">Cultural Heritage</span>
                         <span class="tag">Community</span>
                     </div>
                 </div>
             </div>
 
-            <div class="comic-entry" data-aos="fade-up" data-aos-delay="500" data-tags="innovation,solutions">
-                <img src="/api/placeholder/400/400" alt="Tech for Food">
-                <div class="comic-info">
-                    <h2>Tech for Food</h2>
-                    <p>Exploring how modern technology and mobile apps are helping farmers predict weather patterns and optimize crop yields.</p>
+            <div class="story-entry" data-aos="fade-up" data-aos-delay="300" data-tags="solutions,innovation">
+                <div class="story-header">
+                    <h2>Tomorrow's Harvest</h2>
+                </div>
+                <div class="story-info">
+                    <p>A deep dive into climate-smart agriculture initiatives in Eastern Uganda, where farmers are adapting to changing weather patterns through innovative farming techniques and community-based weather monitoring systems.</p>
                     <div class="tags">
-                        <span class="tag">Innovation</span>
                         <span class="tag">Solutions</span>
+                        <span class="tag">Innovation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-entry" data-aos="fade-up" data-aos-delay="400" data-tags="personal,culture">
+                <div class="story-header">
+                    <h2>Market Chronicles</h2>
+                </div>
+                <div class="story-info">
+                    <p>Through the eyes of market vendor Maria in Mbale, we explore how local food systems are adapting to modern challenges while maintaining cultural connections. Her story reveals the complex web of relationships that sustain community food security.</p>
+                    <div class="tags">
+                        <span class="tag">Personal Narrative</span>
+                        <span class="tag">Cultural Impact</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-entry" data-aos="fade-up" data-aos-delay="500" data-tags="solutions,community">
+                <div class="story-header">
+                    <h2>Growing Together</h2>
+                </div>
+                <div class="story-info">
+                    <p>The transformative story of the Gulu Community Farm Project, where former refugees are building food security through collaborative farming. Their journey highlights the power of community-driven solutions in post-conflict regions.</p>
+                    <div class="tags">
+                        <span class="tag">Solutions</span>
+                        <span class="tag">Community Action</span>
                     </div>
                 </div>
             </div>
@@ -118,18 +332,15 @@
     <div class="modal">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
-            <img src="" alt="">
             <h2></h2>
             <p></p>
             <div class="tags"></div>
             <div class="modal-nav">
-                <button class="prev-comic">Previous</button>
-                <button class="next-comic">Next</button>
+                <button class="prev-story">Previous Story</button>
+                <button class="next-story">Next Story</button>
             </div>
         </div>
     </div>
-
-    <div class="loading"></div>
 
     <script>
         // Initialize AOS
@@ -139,23 +350,22 @@
         });
 
         // DOM Elements
-        const comicsGrid = document.querySelector('.comics-grid');
+        const storiesGrid = document.querySelector('.stories-grid');
         const searchBox = document.querySelector('.search-box');
         const filterButtons = document.querySelectorAll('.filter-btn');
         const modal = document.querySelector('.modal');
         const modalContent = modal.querySelector('.modal-content');
         const closeModal = modal.querySelector('.close-modal');
-        const prevButton = modal.querySelector('.prev-comic');
-        const nextButton = modal.querySelector('.next-comic');
-        const loading = document.querySelector('.loading');
+        const prevButton = modal.querySelector('.prev-story');
+        const nextButton = modal.querySelector('.next-story');
 
-        let currentComicIndex = 0;
-        let visibleComics = [];
+        let currentStoryIndex = 0;
+        let visibleStories = [];
 
         // Search functionality
         searchBox.addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
-            filterComics();
+            filterStories();
         });
 
         // Filter functionality
@@ -163,56 +373,53 @@
             button.addEventListener('click', () => {
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-                filterComics();
+                filterStories();
             });
         });
 
-        function filterComics() {
+        function filterStories() {
             const searchTerm = searchBox.value.toLowerCase();
             const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
             
-            const comics = document.querySelectorAll('.comic-entry');
-            visibleComics = [];
+            const stories = document.querySelectorAll('.story-entry');
+            visibleStories = [];
 
-            comics.forEach(comic => {
-                const title = comic.querySelector('h2').textContent.toLowerCase();
-                const description = comic.querySelector('p').textContent.toLowerCase();
-                const tags = comic.dataset.tags;
+            stories.forEach(story => {
+                const title = story.querySelector('h2').textContent.toLowerCase();
+                const description = story.querySelector('p').textContent.toLowerCase();
+                const tags = story.dataset.tags;
 
                 const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
                 const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
 
                 if (matchesSearch && matchesFilter) {
-                    comic.style.display = 'block';
-                    visibleComics.push(comic);
+                    story.style.display = 'block';
+                    visibleStories.push(story);
                 } else {
-                    comic.style.display = 'none';
+                    story.style.display = 'none';
                 }
             });
 
-            // Refresh AOS
             AOS.refresh();
         }
 
         // Modal functionality
-        comicsGrid.addEventListener('click', (e) => {
-            const comic = e.target.closest('.comic-entry');
-            if (comic) {
-                currentComicIndex = visibleComics.indexOf(comic);
-                showModal(comic);
+        storiesGrid.addEventListener('click', (e) => {
+            const story = e.target.closest('.story-entry');
+            if (story) {
+                currentStoryIndex = visibleStories.indexOf(story);
+                showModal(story);
             }
         });
 
-        function showModal(comic) {
-            const img = comic.querySelector('img');
-            const title = comic.querySelector('h2');
-            const description = comic.querySelector('p');
-            const tags = comic.querySelector('.tags');
+        function showModal(story) {
+            const title = story.querySelector('h2').textContent;
+            const description = story.querySelector('p').textContent;
+            const tags = story.querySelector('.tags').innerHTML;
 
-            modal.querySelector('img').src = img.src;
-            modal.querySelector('h2').textContent = title.textContent;
-modal.querySelector('p').textContent = description.textContent;
-            modal.querySelector('.tags').innerHTML = tags.innerHTML;
+            modalContent.querySelector('h2').textContent = title;
+            modalContent.querySelector('p').textContent = description;
+            modalContent.querySelector('.tags').innerHTML = tags;
 
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -221,8 +428,8 @@ modal.querySelector('p').textContent = description.textContent;
         }
 
         function updateNavigationButtons() {
-            prevButton.style.visibility = currentComicIndex > 0 ? 'visible' : 'hidden';
-            nextButton.style.visibility = currentComicIndex < visibleComics.length - 1 ? 'visible' : 'hidden';
+            prevButton.style.visibility = currentStoryIndex > 0 ? 'visible' : 'hidden';
+            nextButton.style.visibility = currentStoryIndex < visibleStories.length - 1 ? 'visible' : 'hidden';
         }
 
         // Close modal
@@ -231,95 +438,4 @@ modal.querySelector('p').textContent = description.textContent;
             document.body.style.overflow = 'auto';
         });
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Navigation within modal
-        prevButton.addEventListener('click', () => {
-            if (currentComicIndex > 0) {
-                currentComicIndex--;
-                showModal(visibleComics[currentComicIndex]);
-            }
-        });
-
-        nextButton.addEventListener('click', () => {
-            if (currentComicIndex < visibleComics.length - 1) {
-                currentComicIndex++;
-                showModal(visibleComics[currentComicIndex]);
-            }
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (modal.style.display === 'flex') {
-                if (e.key === 'Escape') {
-                    modal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                } else if (e.key === 'ArrowLeft' && currentComicIndex > 0) {
-                    currentComicIndex--;
-                    showModal(visibleComics[currentComicIndex]);
-                } else if (e.key === 'ArrowRight' && currentComicIndex < visibleComics.length - 1) {
-                    currentComicIndex++;
-                    showModal(visibleComics[currentComicIndex]);
-                }
-            }
-        });
-
-        // Navigation scroll and hamburger menu functionality
-        const nav = document.querySelector('.nav');
-        const hamburger = document.querySelector('.hamburger');
-        let lastScroll = 0;
-
-        // Hamburger menu toggle
-        hamburger.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
-
-        // Hide navigation on scroll down, show on scroll up
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.scrollY;
-            
-            if (currentScroll <= 0) {
-                nav.classList.remove('hidden');
-                return;
-            }
-            
-            if (currentScroll > lastScroll && !nav.classList.contains('hidden')) {
-                // Scrolling down
-                nav.classList.add('hidden');
-            } else if (currentScroll < lastScroll && nav.classList.contains('hidden')) {
-                // Scrolling up
-                nav.classList.remove('hidden');
-            }
-            
-            lastScroll = currentScroll;
-        });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                hamburger.classList.remove('active');
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
-                nav.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-        });
-
-        // Initialize filters on page load
-        filterComics();
-    </script>
-        <script src="script.js"></script> <!-- Path to script.js -->
-
-</body>
-</html>
+        modal.
