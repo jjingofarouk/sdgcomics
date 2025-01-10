@@ -407,6 +407,74 @@
             once: true
         });
 
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const nav = document.querySelector('.nav');
+            
+            // Toggle menu
+            navToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInside = navMenu.contains(event.target) || navToggle.contains(event.target);
+                if (!isClickInside && navMenu.classList.contains('active')) {
+                    navToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                }
+            });
+
+            // Close menu when clicking a link
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+
+            // Scroll behavior
+            let lastScroll = 0;
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                // Add scrolled class for visual changes
+                if (currentScroll > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+
+                lastScroll = currentScroll;
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+                    navToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                }
+            });
+
+            // Prevent scroll when menu is open (mobile only)
+            function toggleScroll(event) {
+                if (document.body.classList.contains('menu-open')) {
+                    event.preventDefault();
+                }
+            }
+
+            // Add touch event listeners for mobile
+            document.addEventListener('touchmove', toggleScroll, { passive: false });
+        });
+
         // DOM Elements
         const storiesGrid = document.querySelector('.stories-grid');
         const searchBox = document.querySelector('.search-box');
@@ -641,7 +709,6 @@
         });
     });
 </script>
-        <script src="script.js"></script>
 
 </body>
 </html>
