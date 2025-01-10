@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Insecurity Comics - Uganda</title>
+    <title>Uganda's SDG Stories - Comic Narratives</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
     <style>
         :root {
-            --primary: #2D4B2D;
-            --secondary: #E6B89C;
+            --primary: #19486A;
+            --secondary: #26BDE2;
             --text: #333;
-            --background: #F9F5F2;
+            --background: #F5F7FA;
         }
 
         * {
@@ -28,100 +27,44 @@
             color: var(--text);
             background: var(--background);
         }
-/* Replace the existing .nav related CSS with this */
-.nav {
-    background: var(--primary);
-    padding: 1rem;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-    z-index: 1000;
-}
 
-.nav.hidden {
-    transform: translateY(-100%);
-}
+        .nav {
+            background: var(--primary);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
 
-.nav ul {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    gap: 2rem;
-    padding: 0 1rem;
-    list-style: none;
-}
+        .nav.hidden {
+            transform: translateY(-100%);
+        }
 
-.nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-}
+        .nav ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            padding: 0 1rem;
+            list-style: none;
+        }
 
-.nav a:hover {
-    background: rgba(255,255,255,0.1);
-    transform: translateY(-1px);
-}
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
 
-.hamburger {
-    display: none;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    padding: 0.5rem;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-}
-
-.hamburger span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background: white;
-    margin: 5px 0;
-    transition: all 0.3s ease;
-}
-
-@media (max-width: 768px) {
-    .hamburger {
-        display: block;
-        z-index: 1001;
-    }
-
-    .nav ul {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 70%;
-        height: 100vh;
-        background: var(--primary);
-        flex-direction: column;
-        justify-content: center;
-        padding: 2rem;
-        transition: right 0.3s ease;
-    }
-
-    .nav.active ul {
-        right: 0;
-    }
-
-    .hamburger.active span:nth-child(1) {
-        transform: rotate(45deg) translate(8px, 6px);
-    }
-
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -5px);
-    }
-}
+        .nav a:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-1px);
+        }
 
         .hero {
             min-height: 100vh;
@@ -135,6 +78,10 @@
             padding: 2rem;
             color: white;
             position: relative;
+        }
+
+        .hero-content {
+            max-width: 1000px;
         }
 
         .hero h1 {
@@ -207,27 +154,6 @@
             overflow: hidden;
         }
 
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-
-        .stat-item:hover::before {
-            transform: translateX(100%);
-        }
-
-        .stat-item h2 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
         .cta {
             text-align: center;
             padding: 4rem 2rem;
@@ -235,16 +161,11 @@
             color: white;
         }
 
-        .cta h2 {
-            margin-bottom: 2rem;
-            font-size: clamp(2rem, 4vw, 3rem);
-        }
-
         .button {
             display: inline-block;
             padding: 1rem 2rem;
             background: var(--secondary);
-            color: var(--primary);
+            color: white;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
@@ -253,64 +174,6 @@
 
         .button:hover {
             transform: scale(1.05);
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            cursor: pointer;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-30px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-15px);
-            }
-        }
-
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: var(--secondary);
-            z-index: 1001;
-            transition: width 0.3s ease;
-        }
-
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--primary);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--secondary);
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
         }
 
         @media (max-width: 768px) {
@@ -322,117 +185,108 @@
                 gap: 1rem;
             }
         }
-    </style> 
+    </style>
 </head>
 <body>
-    <div class="loading-overlay">
-        <div class="loading-spinner"></div>
-    </div>
-
-    <div class="progress-bar"></div>
-
-<nav class="nav">
-    <button class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="comics.html">Comics</a></li>
-        <li><a href="stories.html">Stories</a></li>
-        <li><a href="impact.html">Impact</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
-</nav>
-
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About SDGs</a></li>
+            <li><a href="stories.html">Stories</a></li>
+            <li><a href="characters.html">Characters</a></li>
+            <li><a href="impact.html">Impact</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Visualizing Food Insecurity in Rural Uganda</h1>
-            <p>A comic series highlighting the challenges and stories of communities facing food insecurity in rural Uganda, seeking to drive change through visual storytelling.</p>
-        </div>
-        <div class="scroll-indicator">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
-                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-            </svg>
+            <h1>Uganda's Journey Through the SDGs</h1>
+            <p>Exploring sustainable development through compelling Ugandan stories. Join our characters as they navigate challenges, celebrate victories, and work towards a better tomorrow across all 17 Sustainable Development Goals.</p>
         </div>
     </section>
 
     <div class="content">
         <div class="stats" data-aos="fade-up">
             <div class="stat-item">
-                <h2 id="stat1">0%</h2>
-                <p>of rural Ugandans face food insecurity</p>
+                <h2 id="stat1">0</h2>
+                <p>Unique Stories</p>
             </div>
             <div class="stat-item">
                 <h2 id="stat2">0</h2>
-                <p>children affected by malnutrition</p>
+                <p>SDGs Covered</p>
             </div>
             <div class="stat-item">
-                <h2 id="stat3">0%</h2>
-                <p>rely on subsistence farming</p>
+                <h2 id="stat3">0</h2>
+                <p>Communities Represented</p>
             </div>
         </div>
 
         <div class="gallery">
-            <a href="comics.html" class="comic-panel" data-aos="fade-up">
-                <img src="/api/placeholder/400/250" alt="Comic Panel 1">
+            <a href="stories/no-poverty.html" class="comic-panel" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="No Poverty Story">
                 <div class="text">
-                    <h3>The Daily Struggle</h3>
-                    <p>Following Sarah's journey to provide meals for her family during the dry season.</p>
+                    <h3>The Seeds of Change (SDG 1: No Poverty)</h3>
+                    <p>Follow Nakato, a determined farmer in Kabale, as she transforms her community through innovative agricultural practices and microfinance initiatives. Her story shows how local solutions can break the cycle of poverty.</p>
                 </div>
             </a>
-            <a href="comics.html" class="comic-panel" data-aos="fade-up" data-aos-delay="100">
-                <img src="/api/placeholder/400/250" alt="Comic Panel 2">
+
+            <a href="stories/climate-action.html" class="comic-panel" data-aos="fade-up" data-aos-delay="100">
+                <img src="/api/placeholder/400/250" alt="Climate Action Story">
                 <div class="text">
-                    <h3>Community Solutions</h3>
-                    <p>How local communities are working together to create sustainable food systems.</p>
+                    <h3>Guardians of the Forest (SDG 13: Climate Action)</h3>
+                    <p>Join Okello and his youth environmental club in Budongo Forest as they combat deforestation, protect endangered chimpanzees, and implement community-based climate solutions.</p>
                 </div>
             </a>
-            <a href="comics.html" class="comic-panel" data-aos="fade-up" data-aos-delay="200">
-                <img src="/api/placeholder/400/250" alt="Comic Panel 3">
+
+            <a href="stories/gender-equality.html" class="comic-panel" data-aos="fade-up" data-aos-delay="200">
+                <img src="/api/placeholder/400/250" alt="Gender Equality Story">
                 <div class="text">
-                    <h3>Hope for Tomorrow</h3>
-                    <p>Exploring innovative agricultural practices bringing positive change.</p>
+                    <h3>Breaking Barriers (SDG 5: Gender Equality)</h3>
+                    <p>Experience Sarah's inspiring journey as she challenges traditional norms to become her village's first female solar engineer, empowering other women along the way.</p>
+                </div>
+            </a>
+
+            <a href="stories/quality-education.html" class="comic-panel" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="Quality Education Story">
+                <div class="text">
+                    <h3>Dreams Beyond Borders (SDG 4: Quality Education)</h3>
+                    <p>Follow the story of Daniel, a refugee teacher in Bidi Bidi settlement, who creates innovative learning solutions for children from diverse backgrounds.</p>
+                </div>
+            </a>
+
+            <a href="stories/clean-water.html" class="comic-panel" data-aos="fade-up" data-aos-delay="100">
+                <img src="/api/placeholder/400/250" alt="Clean Water Story">
+                <div class="text">
+                    <h3>The Water Keepers (SDG 6: Clean Water)</h3>
+                    <p>Meet Auma and her team of community water engineers in Gulu as they develop sustainable solutions for clean water access and sanitation.</p>
+                </div>
+            </a>
+
+            <a href="stories/sustainable-cities.html" class="comic-panel" data-aos="fade-up" data-aos-delay="200">
+                <img src="/api/placeholder/400/250" alt="Sustainable Cities Story">
+                <div class="text">
+                    <h3>Urban Dreams (SDG 11: Sustainable Cities)</h3>
+                    <p>Experience Kampala's transformation through the eyes of Mutesi, an urban planner working with local communities to create sustainable, inclusive neighborhoods.</p>
                 </div>
             </a>
         </div>
     </div>
 
     <section class="cta">
-        <h2>Support This Project</h2>
-        <p>Help us bring these stories to light and create meaningful change through visual storytelling.</p>
+        <h2>Join Our Storytelling Movement</h2>
+        <p>Help us amplify these voices of change and inspire action towards achieving the Sustainable Development Goals in Uganda.</p>
         <br>
-        <a href="contact.html" class="button">Talk to Us</a>
+        <a href="contribute.html" class="button">Share Your Story</a>
     </section>
 
     <script>
-        // Initialize AOS
         AOS.init({
             duration: 800,
             once: true
         });
 
-        // Handle loading overlay
-        window.addEventListener('load', () => {
-            document.querySelector('.loading-overlay').style.opacity = '0';
-            setTimeout(() => {
-                document.querySelector('.loading-overlay').style.display = 'none';
-            }, 500);
-        });
-
-        // Handle scroll progress bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.querySelector('.progress-bar').style.width = scrolled + '%';
-        });
-
-        // Initialize CountUp for statistics
         const options = {
             duration: 2.5,
             useGrouping: true,
@@ -440,12 +294,11 @@
         };
 
         const countUpElements = [
-            { id: 'stat1', target: 41, suffix: '%' },
-            { id: 'stat2', target: 2.6, suffix: 'M' },
-            { id: 'stat3', target: 89, suffix: '%' }
+            { id: 'stat1', target: 34, suffix: '+' },
+            { id: 'stat2', target: 17, suffix: '' },
+            { id: 'stat3', target: 28, suffix: '' }
         ];
 
-        // Function to start counting when element is in view
         function startCountingWhenVisible(entries, observer) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -463,84 +316,16 @@
             });
         }
 
-        // Set up Intersection Observer for statistics
         const observer = new IntersectionObserver(startCountingWhenVisible, {
             threshold: 0.5
         });
 
-        // Observe each statistic element
         countUpElements.forEach(item => {
             const element = document.getElementById(item.id);
             if (element) {
                 observer.observe(element);
             }
         });
-
-        // Handle scroll indicator
-        const scrollIndicator = document.querySelector('.scroll-indicator');
-        
-        // Smooth scroll function
-        scrollIndicator.addEventListener('click', () => {
-            window.scrollTo({
-                top: window.innerHeight,
-                behavior: 'smooth'
-            });
-        });
-
-        // Hide scroll indicator when user scrolls
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                scrollIndicator.style.opacity = '0';
-            } else {
-                scrollIndicator.style.opacity = '1';
-            }
-        });
-        // Navigation scroll and hamburger menu functionality
-const nav = document.querySelector('.nav');
-const hamburger = document.querySelector('.hamburger');
-let lastScroll = 0;
-
-// Hamburger menu toggle
-hamburger.addEventListener('click', () => {
-    nav.classList.toggle('active');
-    hamburger.classList.toggle('active');
-});
-
-// Hide navigation on scroll down, show on scroll up
-window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
-    
-    if (currentScroll <= 0) {
-        nav.classList.remove('hidden');
-        return;
-    }
-    
-    if (currentScroll > lastScroll && !nav.classList.contains('hidden')) {
-        // Scrolling down
-        nav.classList.add('hidden');
-    } else if (currentScroll < lastScroll && nav.classList.contains('hidden')) {
-        // Scrolling up
-        nav.classList.remove('hidden');
-    }
-    
-    lastScroll = currentScroll;
-});
-
-// Close mobile menu when clicking a link
-document.querySelectorAll('.nav a').forEach(link => {
-    link.addEventListener('click', () => {
-        nav.classList.remove('active');
-        hamburger.classList.remove('active');
-    });
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
-        nav.classList.remove('active');
-        hamburger.classList.remove('active');
-    }
-});
     </script>
 </body>
 </html>
