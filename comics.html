@@ -13,53 +13,106 @@
             --accent-color: #FF9E1B;
             --background-color: #f5f5f5;
             --text-color: #333;
+            --nav-height: 60px;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
+            overflow-x: hidden;
         }
 
+        /* Enhanced Navigation Styles */
         .nav {
-            background: var(--primary);
-            padding: 0.5rem;
             position: fixed;
-            width: 100%;
             top: 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            left: 0;
+            right: 0;
+            background: var(--primary-color);
+            height: var(--nav-height);
             z-index: 1000;
+            transition: transform var(--transition-speed) ease;
         }
 
-        .nav.scrolled {
-            padding: 0.3rem;
-            background: rgba(25, 72, 106, 0.95);
-            backdrop-filter: blur(10px);
+        .nav.hidden {
+            transform: translateY(-100%);
         }
 
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             padding: 0 1rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .nav-logo {
             color: white;
+            font-size: 1.25rem;
             font-weight: bold;
             text-decoration: none;
-            font-size: 1.2rem;
             z-index: 1001;
+        }
+
+        /* Improved Hamburger Menu */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            position: relative;
+            z-index: 1001;
+            width: 30px;
+            height: 30px;
+        }
+
+        .hamburger-lines {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hamburger-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            transition: all var(--transition-speed) ease-in-out;
+        }
+
+        .line1 { top: 20%; }
+        .line2 { top: 50%; transform: translateY(-50%); }
+        .line3 { bottom: 20%; }
+
+        .hamburger.active .line1 {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active .line2 {
+            opacity: 0;
+        }
+
+        .hamburger.active .line3 {
+            transform: translateY(-8px) rotate(-45deg);
         }
 
         .nav-menu {
             display: flex;
             gap: 2rem;
             list-style: none;
+            margin: 0;
+            padding: 0;
         }
 
         .nav-menu a {
@@ -67,36 +120,16 @@
             text-decoration: none;
             font-weight: 500;
             padding: 0.5rem;
-            border-radius: 4px;
-            transition: all 0.2s ease;
+            transition: all var(--transition-speed) ease;
         }
 
         .nav-menu a:hover {
-            background: rgba(255,255,255,0.1);
-            transform: translateY(-1px);
+            color: var(--accent-color);
         }
 
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            padding: 0.5rem;
-            z-index: 1001;
-        }
-
-        .nav-toggle span {
-            display: block;
-            width: 25px;
-            height: 2px;
-            background: white;
-            margin: 5px 0;
-            transition: all 0.3s ease;
-        }
-
+        /* Enhanced Mobile Menu */
         @media (max-width: 768px) {
-            .nav-toggle {
+            .hamburger {
                 display: block;
             }
 
@@ -104,35 +137,67 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                height: 100vh;
                 width: 100%;
                 max-width: 300px;
-                background: var(--primary);
+                height: 100vh;
+                background: var(--primary-color);
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                gap: 1.5rem;
-                transition: right 0.3s ease;
+                gap: 2rem;
                 padding: 2rem;
+                transition: right var(--transition-speed) ease;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
             }
 
             .nav-menu.active {
                 right: 0;
             }
 
-            .nav-toggle.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-
-            .nav-toggle.active span:nth-child(2) {
+            .nav-menu li {
                 opacity: 0;
+                transform: translateX(50px);
+                transition: all var(--transition-speed) ease;
             }
 
-            .nav-toggle.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(7px, -7px);
+            .nav-menu.active li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            /* Staggered animation for menu items */
+            .nav-menu li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-menu li:nth-child(2) { transition-delay: 0.2s; }
+            .nav-menu li:nth-child(3) { transition-delay: 0.3s; }
+            .nav-menu li:nth-child(4) { transition-delay: 0.4s; }
+            .nav-menu li:nth-child(5) { transition-delay: 0.5s; }
+            .nav-menu li:nth-child(6) { transition-delay: 0.6s; }
+            .nav-menu li:nth-child(7) { transition-delay: 0.7s; }
+
+            .nav-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                visibility: hidden;
+                transition: all var(--transition-speed) ease;
+                z-index: 999;
+            }
+
+            .nav-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            body.menu-open {
+                overflow: hidden;
             }
         }
 
+        /* Rest of your existing styles remain unchanged */
         .controls {
             margin-top: 80px;
             padding: 2rem;
@@ -169,6 +234,7 @@
             background-color: var(--accent-color);
         }
 
+        /* Existing stories grid styles */
         .stories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -220,6 +286,7 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Enhanced Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -241,6 +308,7 @@
             width: 90%;
             max-height: 90vh;
             overflow-y: auto;
+            position: relative;
         }
 
         .close-modal {
@@ -260,18 +328,45 @@
             margin-top: 1rem;
         }
 
+        /* Mobile Responsive Adjustments */
         @media (max-width: 768px) {
-            .nav ul {
-                flex-direction: column;
-                align-items: center;
+            .search-box {
+                width: 100%;
+                max-width: 300px;
             }
 
             .filter-buttons {
                 flex-direction: column;
+                align-items: center;
             }
 
-            .search-box {
+            .filter-btn {
                 width: 100%;
+                max-width: 300px;
+            }
+
+            .stories-grid {
+                padding: 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) {
+            .story-entry {
+                transform: none !important;
+            }
+
+            .nav-menu a {
+                padding: 1rem;
+            }
+
+            .filter-btn {
+                padding: 0.75rem 1.5rem;
             }
         }
     </style>
@@ -280,10 +375,12 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">SDG Stories</a>
-            <button class="nav-toggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="hamburger" aria-label="Toggle navigation">
+                <div class="hamburger-lines">
+                    <span class="hamburger-line line1"></span>
+                    <span class="hamburger-line line2"></span>
+                    <span class="hamburger-line line3"></span>
+                </div>
             </button>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
@@ -296,6 +393,7 @@
             </ul>
         </div>
     </nav>
+    <div class="nav-overlay"></div>
 
     <div class="controls">
         <input type="text" class="search-box" placeholder="Search stories...">
@@ -387,6 +485,7 @@
         </div>
     </div>
 
+    <!-- Modal structure -->
     <div class="modal">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
@@ -407,75 +506,92 @@
             once: true
         });
 
-        // Navigation functionality
+        // Enhanced navigation functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const navToggle = document.querySelector('.nav-toggle');
+            const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
             const nav = document.querySelector('.nav');
+            const overlay = document.querySelector('.nav-overlay');
             
-            // Toggle menu
-            navToggle.addEventListener('click', function() {
-                this.classList.toggle('active');
+            // Improved hamburger menu toggle
+            function toggleMenu() {
+                hamburger.classList.toggle('active');
                 navMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
                 document.body.classList.toggle('menu-open');
-            });
+            }
 
-            // Close menu when clicking outside
-            document.addEventListener('click', function(event) {
-                const isClickInside = navMenu.contains(event.target) || navToggle.contains(event.target);
-                if (!isClickInside && navMenu.classList.contains('active')) {
-                    navToggle.classList.remove('active');
-                    navMenu.classList.remove('active');
-                    document.body.classList.remove('menu-open');
-                }
-            });
+            hamburger.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
 
             // Close menu when clicking a link
             const navLinks = document.querySelectorAll('.nav-menu a');
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
-                    navToggle.classList.remove('active');
-                    navMenu.classList.remove('active');
-                    document.body.classList.remove('menu-open');
+                    if (navMenu.classList.contains('active')) {
+                        toggleMenu();
+                    }
                 });
             });
 
-            // Scroll behavior
+            // Enhanced scroll behavior
             let lastScroll = 0;
+            const scrollThreshold = 5;
+// Enhanced scroll behavior continued...
+let scrollTimer = null;
+            
             window.addEventListener('scroll', () => {
                 const currentScroll = window.pageYOffset;
                 
-                // Add scrolled class for visual changes
-                if (currentScroll > 50) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
+                if (currentScroll <= 0) {
+                    nav.classList.remove('hidden');
+                    return;
                 }
 
-                lastScroll = currentScroll;
+                // Clear the existing timer
+                if (scrollTimer !== null) {
+                    clearTimeout(scrollTimer);
+                }
+
+                // Set a timeout to hide/show the nav after scrolling stops
+                scrollTimer = setTimeout(() => {
+                    if (Math.abs(currentScroll - lastScroll) > scrollThreshold) {
+                        if (currentScroll > lastScroll) {
+                            nav.classList.add('hidden');
+                        } else {
+                            nav.classList.remove('hidden');
+                        }
+                    }
+                    lastScroll = currentScroll;
+                }, 50);
             });
 
             // Handle window resize
+            let resizeTimer;
             window.addEventListener('resize', () => {
-                if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
-                    navToggle.classList.remove('active');
-                    navMenu.classList.remove('active');
-                    document.body.classList.remove('menu-open');
-                }
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    if (window.innerWidth > 768) {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('menu-open');
+                    }
+                }, 250);
             });
 
-            // Prevent scroll when menu is open (mobile only)
-            function toggleScroll(event) {
+            // Prevent scroll when menu is open on mobile
+            function preventScroll(e) {
                 if (document.body.classList.contains('menu-open')) {
-                    event.preventDefault();
+                    e.preventDefault();
                 }
             }
 
             // Add touch event listeners for mobile
-            document.addEventListener('touchmove', toggleScroll, { passive: false });
+            document.addEventListener('touchmove', preventScroll, { passive: false });
         });
 
-        // DOM Elements
+        // Enhanced search and filter functionality
         const storiesGrid = document.querySelector('.stories-grid');
         const searchBox = document.querySelector('.search-box');
         const filterButtons = document.querySelectorAll('.filter-btn');
@@ -487,14 +603,17 @@
 
         let currentStoryIndex = 0;
         let visibleStories = [];
+        let searchDebounceTimer;
 
-        // Search functionality
+        // Debounced search functionality
         searchBox.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            filterStories();
+            clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(() => {
+                filterStories();
+            }, 300);
         });
 
-        // Filter functionality
+        // Enhanced filter functionality
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 filterButtons.forEach(btn => btn.classList.remove('active'));
@@ -504,18 +623,20 @@
         });
 
         function filterStories() {
-            const searchTerm = searchBox.value.toLowerCase();
+            const searchTerm = searchBox.value.toLowerCase().trim();
             const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
             
-            const stories = document.querySelectorAll('.story-entry');
+            const stories = Array.from(document.querySelectorAll('.story-entry'));
             visibleStories = [];
 
             stories.forEach(story => {
                 const title = story.querySelector('h2').textContent.toLowerCase();
                 const description = story.querySelector('p').textContent.toLowerCase();
-                const tags = story.dataset.tags;
+                const tags = story.dataset.tags || '';
 
-                const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                const matchesSearch = !searchTerm || 
+                    title.includes(searchTerm) || 
+                    description.includes(searchTerm);
                 const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
 
                 if (matchesSearch && matchesFilter) {
@@ -526,10 +647,38 @@
                 }
             });
 
+            // Refresh AOS animations
             AOS.refresh();
         }
 
-        // Modal functionality
+        // Enhanced modal functionality
+        function showModal(story) {
+            const title = story.querySelector('h2').textContent;
+            const description = story.querySelector('p').textContent;
+            const tags = story.querySelector('.tags').innerHTML;
+
+            modalContent.querySelector('h2').textContent = title;
+            modalContent.querySelector('p').textContent = description;
+            modalContent.querySelector('.tags').innerHTML = tags;
+
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            updateNavigationButtons();
+            
+            // Add animation class
+            modalContent.classList.add('modal-animate');
+        }
+
+        function updateNavigationButtons() {
+            prevButton.disabled = currentStoryIndex <= 0;
+            nextButton.disabled = currentStoryIndex >= visibleStories.length - 1;
+            
+            prevButton.style.visibility = currentStoryIndex > 0 ? 'visible' : 'hidden';
+            nextButton.style.visibility = currentStoryIndex < visibleStories.length - 1 ? 'visible' : 'hidden';
+        }
+
+        // Modal event listeners
         storiesGrid.addEventListener('click', (e) => {
             const story = e.target.closest('.story-entry');
             if (story) {
@@ -538,38 +687,18 @@
             }
         });
 
-        function showModal(story) {
-            const title = story.querySelector('h2');
-            const description = story.querySelector('p');
-            const tags = story.querySelector('.tags');
-            const sdgNumber = story.querySelector('.sdg-number');
-
-            modalContent.querySelector('h2').textContent = title.textContent;
-            modalContent.querySelector('p').textContent = description.textContent;
-            modalContent.querySelector('.tags').innerHTML = tags.innerHTML;
-
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-
-            updateNavigationButtons();
-        }
-
-        function updateNavigationButtons() {
-            prevButton.style.visibility = currentStoryIndex > 0 ? 'visible' : 'hidden';
-            nextButton.style.visibility = currentStoryIndex < visibleStories.length - 1 ? 'visible' : 'hidden';
-        }
-
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-
+        closeModal.addEventListener('click', closeModalFunction);
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
+                closeModalFunction();
             }
         });
+
+        function closeModalFunction() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            modalContent.classList.remove('modal-animate');
+        }
 
         prevButton.addEventListener('click', () => {
             if (currentStoryIndex > 0) {
@@ -578,137 +707,98 @@
             }
         });
 
-      nextButton.addEventListener('click', () => {
-        if (currentStoryIndex < visibleStories.length - 1) {
-            currentStoryIndex++;
-            showModal(visibleStories[currentStoryIndex]);
-        }
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (modal.style.display === 'flex') {
-            if (e.key === 'Escape') {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            } else if (e.key === 'ArrowLeft' && currentStoryIndex > 0) {
-                currentStoryIndex--;
-                showModal(visibleStories[currentStoryIndex]);
-            } else if (e.key === 'ArrowRight' && currentStoryIndex < visibleStories.length - 1) {
+        nextButton.addEventListener('click', () => {
+            if (currentStoryIndex < visibleStories.length - 1) {
                 currentStoryIndex++;
                 showModal(visibleStories[currentStoryIndex]);
-            }
-        }
-    });
-
-    // Navigation scroll functionality
-    const nav = document.querySelector('.nav');
-    let lastScroll = 0;
-
-    // Hide navigation on scroll down, show on scroll up
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.scrollY;
-        
-        if (currentScroll <= 0) {
-            nav.classList.remove('hidden');
-            return;
-        }
-        
-        if (currentScroll > lastScroll && !nav.classList.contains('hidden')) {
-            // Scrolling down
-            nav.classList.add('hidden');
-        } else if (currentScroll < lastScroll && nav.classList.contains('hidden')) {
-            // Scrolling up
-            nav.classList.remove('hidden');
-        }
-        
-        lastScroll = currentScroll;
-    });
-
-    // Handle mobile nav menu clicks
-    document.querySelectorAll('.nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                nav.classList.remove('active');
             }
         });
-    });
 
-    // Close modal when clicking outside
-    document.addEventListener('click', (e) => {
-        if (modal.style.display === 'flex' && !modalContent.contains(e.target)) {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    });
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === 'flex') {
+                switch(e.key) {
+                    case 'Escape':
+                        closeModalFunction();
+                        break;
+                    case 'ArrowLeft':
+                        if (currentStoryIndex > 0) {
+                            currentStoryIndex--;
+                            showModal(visibleStories[currentStoryIndex]);
+                        }
+                        break;
+                    case 'ArrowRight':
+                        if (currentStoryIndex < visibleStories.length - 1) {
+                            currentStoryIndex++;
+                            showModal(visibleStories[currentStoryIndex]);
+                        }
+                        break;
+                }
+            }
+        });
 
-    // Initialize filters on page load
-    filterStories();
+        // Touch swipe support for modal
+        let touchStartX = 0;
+        let touchEndX = 0;
 
-    // Handle window resize
-    window.addEventListener('resize', () => {
-        AOS.refresh();
-    });
+        modalContent.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
 
-    // Add touch swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
+        modalContent.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
 
-    modalContent.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    });
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const swipeDistance = touchEndX - touchStartX;
 
-    modalContent.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    });
-
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const swipeDistance = touchEndX - touchStartX;
-
-        if (Math.abs(swipeDistance) > swipeThreshold) {
-            if (swipeDistance > 0 && currentStoryIndex > 0) {
-                // Swipe right - show previous
-                currentStoryIndex--;
-                showModal(visibleStories[currentStoryIndex]);
-            } else if (swipeDistance < 0 && currentStoryIndex < visibleStories.length - 1) {
-                // Swipe left - show next
-                currentStoryIndex++;
-                showModal(visibleStories[currentStoryIndex]);
+            if (Math.abs(swipeDistance) > swipeThreshold) {
+                if (swipeDistance > 0 && currentStoryIndex > 0) {
+                    // Swipe right - show previous
+                    currentStoryIndex--;
+                    showModal(visibleStories[currentStoryIndex]);
+                } else if (swipeDistance < 0 && currentStoryIndex < visibleStories.length - 1) {
+                    // Swipe left - show next
+                    currentStoryIndex++;
+                    showModal(visibleStories[currentStoryIndex]);
+                }
             }
         }
-    }
 
-    // Add loading state for dynamic content
-    const setLoading = (loading) => {
-        const loadingElement = document.querySelector('.loading');
-        if (loading) {
-            loadingElement.style.display = 'block';
+        // Error handling
+        window.addEventListener('error', (e) => {
+            console.error('An error occurred:', e.error);
+            // You could add user-friendly error messaging here
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'error-message';
+            errorMessage.textContent = 'Something went wrong. Please try refreshing the page.';
+            document.body.appendChild(errorMessage);
+            
+            setTimeout(() => {
+                errorMessage.remove();
+            }, 5000);
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            filterStories();
+            AOS.refresh();
+        });
+
+        // Handle lazy loading of images if needed
+        if ('loading' in HTMLImageElement.prototype) {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                img.src = img.dataset.src;
+            });
         } else {
-            loadingElement.style.display = 'none';
+            // Fallback for browsers that don't support lazy loading
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+            document.body.appendChild(script);
         }
-    };
-
-    // Handle errors gracefully
-    window.addEventListener('error', (e) => {
-        console.error('An error occurred:', e.error);
-        // You could add user-friendly error messaging here
-    });
-
-    // Ensure smooth scrolling for navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', (e) => {
-            e.preventDefault();
-            const element = document.querySelector(anchor.getAttribute('href'));
-            if (element) {
-                element.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-</script>
-
+    </script>
 </body>
 </html>
