@@ -507,11 +507,113 @@
         </section>
     </div>
 
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true
-          });
+ 
+// Replace the entire script section with this combined version:
+
+<script>
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+
+    // Combined Navigation and Form Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Navigation Elements
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const nav = document.querySelector('.nav');
+        const overlay = document.querySelector('.nav-overlay');
+        
+        // Toggle menu with enhanced functionality
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInside = navMenu.contains(event.target) || hamburger.contains(event.target);
+            if (!isClickInside && navMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        // Close menu when clicking a link
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Enhanced scroll behavior
+        let lastScroll = 0;
+        const scrollThreshold = 5;
+        let scrollTimer = null;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                nav.classList.remove('hidden', 'scrolled');
+                return;
+            }
+
+            // Visual changes for scroll
+            if (currentScroll > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+
+            // Clear the existing timer
+            if (scrollTimer !== null) {
+                clearTimeout(scrollTimer);
+            }
+
+            // Set a timeout to hide/show the nav after scrolling stops
+            scrollTimer = setTimeout(() => {
+                if (Math.abs(currentScroll - lastScroll) > scrollThreshold) {
+                    if (currentScroll > lastScroll) {
+                        nav.classList.add('hidden');
+                    } else {
+                        nav.classList.remove('hidden');
+                    }
+                }
+                lastScroll = currentScroll;
+            }, 50);
+        });
+
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (window.innerWidth > 768) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                }
+            }, 250);
+        });
+
+        // Prevent scroll when menu is open on mobile
+        function preventScroll(e) {
+            if (document.body.classList.contains('menu-open')) {
+                e.preventDefault();
+            }
+        }
+
+        document.addEventListener('touchmove', preventScroll, { passive: false });
 
         // Form handling
         document.querySelectorAll('form').forEach(form => {
@@ -562,7 +664,7 @@
             });
         }
 
-        // Smooth scrolling for anchor links
+        // Enhanced smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -580,7 +682,7 @@
             });
         });
 
-        // File upload preview
+        // File upload preview functionality
         const mediaInput = document.getElementById('media');
         if (mediaInput) {
             mediaInput.addEventListener('change', function(e) {
@@ -619,8 +721,11 @@
                 }
             });
         }
-    </script>
-       <script src="script.js"></script>
 
+        // Initialize filters and modals
+        filterStories();
+        AOS.refresh();
+    });
+</script>
 </body>
 </html>
