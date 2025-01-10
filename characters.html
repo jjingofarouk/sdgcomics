@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Characters - Uganda's SDG Stories</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        :root {
+            --primary: #19486A;
+            --secondary: #26BDE2;
+            --text: #333;
+            --background: #F5F7FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        .nav {
+            background: var(--primary);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            padding: 0 1rem;
+            list-style: none;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .header {
+            padding-top: 80px;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .character-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .character-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .character-info {
+            padding: 1.5rem;
+        }
+
+        .character-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .character-tag {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .character-connections {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About SDGs</a></li>
+            <li><a href="stories.html">Stories</a></li>
+            <li><a href="characters.html">Characters</a></li>
+            <li><a href="impact.html">Impact</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="header">
+        <h1>Meet Our Characters</h1>
+        <p>The inspiring heroes driving sustainable development across Uganda</p>
+    </header>
+
+    <div class="content">
+        <div class="character-grid">
+            <div class="character-card" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="Nakato" class="character-img">
+                <div class="character-info">
+                    <span class="character-tag">SDG 1: No Poverty</span>
+                    <h3>Nakato</h3>
+                    <p>A visionary farmer from Kabale who revolutionized local agriculture through sustainable practices. Her microfinance initiative has helped over 200 women start their own businesses.</p>
+                    <div class="character-connections">
+                        Connected to: Auma (Water Project), Sarah (Solar Engineering)
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="Okello" class="character-img">
+                <div class="character-info">
+                    <span class="character-tag">SDG 13: Climate Action</span>
+                    <h3>Okello</h3>
+                    <p>Young environmental activist leading the Budongo Forest conservation efforts. His youth club has planted over 10,000 trees and created innovative solutions for human-wildlife conflict.</p>
+                    <div class="character-connections">
+                        Connected to: Dr. Namugga (Wildlife Research), Mutesi (Urban Planning)
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="Sarah" class="character-img">
+                <div class="character-info">
+                    <span class="character-tag">SDG 5 & 7: Gender Equality & Clean Energy</span>
+                    <h3>Sarah</h3>
+                    <p>Pioneer female solar engineer breaking gender barriers in rural electrification. She's trained 50 other women in solar technology and runs a successful renewable energy enterprise.</p>
+                    <div class="character-connections">
+                        Connected to: Nakato (Agriculture), Esther (Technology Education)
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="Daniel" class="character-img">
+                <div class="character-info">
+                    <span class="character-tag">SDG 4: Quality Education</span>
+                    <h3>Daniel</h3>
+                    <p>Refugee teacher in Bidi Bidi settlement who developed a multilingual education program. His mobile library initiative reaches children across multiple settlements.</p>
+                    <div class="character-connections">
+                        Connected to: Grace (Mental Health), Ibrahim (Peace Building)
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="Auma" class="character-img">
+                <div class="character-info">
+                    <span class="character-tag">SDG 6: Clean Water</span>
+                    <h3>Auma</h3>
+                    <p>Community water engineer in Gulu leading innovations in sustainable water access. Her team has developed low-cost water filtration systems and trains communities in maintenance.</p>
+                    <div class="character-connections">
+                        Connected to: Dr. Kiiza (Health), Nakato (Agriculture)
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="Mutesi" class="character-img">
+                <div class="character-info">
+                    <span class="character-tag">SDG 11: Sustainable Cities</span>
+                    <h3>Mutesi</h3>
+                    <p>Urban planner transforming Kampala's neighborhoods through community-led development. Her projects focus on green spaces, sustainable transport, and inclusive housing.</p>
+                    <div class="character-connections">
+                        Connected to: Okello (Environment), James (Innovation)
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="Dr. Kiiza" class="character-img">
+                <div class="character-info">
+                    <span class="character-tag">SDG 3: Good Health</span>
+                    <h3>Dr. Kiiza</h3>
+                    <p>Rural healthcare innovator who created a mobile clinic network. Her telemedicine program connects remote villages with specialist doctors in urban centers.</p>
+                    <div class="character-connections">
+                        Connected to: Auma (Water), Grace (Mental Health)
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="James" class="character-img">
+                <div class="character-info">
+                    <span class="character-tag">SDG 9: Industry & Innovation</span>
+                    <h3>James</h3>
+                    <p>Tech entrepreneur developing affordable agricultural technologies. His solar-powered cold storage solution helps farmers reduce post-harvest losses.</p>
+                    <div class="character-connections">
+                        Connected to: Nakato (Agriculture), Sarah (Solar Energy)
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="Grace" class="character-img">
+                <div class="character-info">
+                    <span class="character-tag">SDG 3: Mental Health</span>
+                    <h3>Grace</h3>
+                    <p>Mental health advocate working with refugee communities. She pioneered art therapy programs and trains community mental health workers.</p>
+                    <div class="character-connections">
+                        Connected to: Daniel (Education), Dr. Kiiza (Healthcare)
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="Ibrahim" class="character-img">
+                <div class="character-info">
+                    <span class="character-tag">SDG 16: Peace & Justice</span>
+                    <h3>Ibrahim</h3>
+                    <p>Former refugee turned peace-building facilitator. He runs conflict resolution workshops and youth leadership programs across settlement communities.</p>
+                    <div class="character-connections">
+                        Connected to: Daniel (Education), Grace (Mental Health)
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="Esther" class="character-img">
+                <div class="character-info">
+                    <span class="character-tag">SDG 8: Decent Work</span>
+                    <h3>Esther</h3>
+                    <p>Digital skills trainer empowering youth with technology education. Her coding bootcamps have helped hundreds of young people secure remote work opportunities.</p>
+                    <div class="character-connections">
+                        Connected to: Sarah (Technology), James (Innovation)
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-aos="fade-up">
+                <img src="/api/placeholder/400/250" alt="Dr. Namugga" class="character-img">
+                <div class="character-info">
+                    <span class="character-tag">SDG 15: Life on Land</span>
+                    <h3>Dr. Namugga</h3>
+                    <p>Wildlife researcher studying human-wildlife coexistence. Her community-based conservation approach has become a model for protected areas across Uganda.</p>
+                    <div class="character-connections">
+                        Connected to: Okello (Environment), Mutesi (Urban Planning)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+</html>
