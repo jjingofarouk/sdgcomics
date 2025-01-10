@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Visual Storytelling for Change</title>
+    <title>About Uganda SDG Comics - Driving Change Through Visual Storytelling</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         :root {
-            --primary: #2D4B2D;
-            --secondary: #E6B89C;
-            --accent: #FF6B6B;
+            --primary: #19486A;
+            --secondary: #26BDE2;
             --text: #333;
-            --background: #F9F5F2;
+            --background: #F5F7FA;
+            --accent: #FFC107;
         }
 
         * {
@@ -26,389 +26,289 @@
             line-height: 1.6;
             color: var(--text);
             background: var(--background);
-            overflow-x: hidden;
         }
-/* Replace the existing .nav related CSS with this */
-.nav {
-    background: var(--primary);
-    padding: 1rem;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-    z-index: 1000;
-}
 
-.nav.hidden {
-    transform: translateY(-100%);
-}
-
-.nav ul {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    gap: 2rem;
-    padding: 0 1rem;
-    list-style: none;
-}
-
-.nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-}
-
-.nav a:hover {
-    background: rgba(255,255,255,0.1);
-    transform: translateY(-1px);
-}
-
-.hamburger {
-    display: none;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    padding: 0.5rem;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-}
-
-.hamburger span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background: white;
-    margin: 5px 0;
-    transition: all 0.3s ease;
-}
-
-@media (max-width: 768px) {
-    .hamburger {
-        display: block;
-        z-index: 1001;
-    }
-
-    .nav ul {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 70%;
-        height: 100vh;
-        background: var(--primary);
-        flex-direction: column;
-        justify-content: center;
-        padding: 2rem;
-        transition: right 0.3s ease;
-    }
-
-    .nav.active ul {
-        right: 0;
-    }
-
-    .hamburger.active span:nth-child(1) {
-        transform: rotate(45deg) translate(8px, 6px);
-    }
-
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -5px);
-    }
-}
-        .content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 8rem 2rem 4rem;
+        .nav {
+            background: var(--primary);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
         .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            padding-top: 80px;
+            background: linear-gradient(rgba(25, 72, 106, 0.9), rgba(25, 72, 106, 0.9)), url('/api/placeholder/1920/1080');
+            background-size: cover;
             color: white;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/api/placeholder/1000/600') center/cover;
-            margin: -8rem -2rem 4rem;
-            padding: 2rem;
+            text-align: center;
+            padding-bottom: 4rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: white;
         }
 
-        .profile {
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .mission-cards {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
-            margin: 4rem 0;
-            align-items: center;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
         }
 
-        .profile-image {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        .mission-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .sdg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .sdg-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 10px;
             overflow: hidden;
-            transition: border-radius 0.8s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .profile-image:hover {
-            border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
-        }
-
-        .profile-image img {
+        .team-member img {
             width: 100%;
-            height: 100%;
+            height: 300px;
             object-fit: cover;
         }
 
-        .story-grid {
+        .team-info {
+            padding: 1.5rem;
+        }
+
+        .partners-section {
+            background: white;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+        }
+
+        .partner-logos {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
             margin: 4rem 0;
         }
 
-        .story-card {
-            background: white;
+        .stat-box {
+            background: var(--primary);
+            color: white;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            cursor: pointer;
+            border-radius: 10px;
         }
 
-        .story-card:hover {
-            transform: translateY(-5px);
+        .stat-box h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
 
-        .impact-counter {
-            font-size: 3rem;
+        .button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
             font-weight: bold;
-            color: var(--primary);
-            text-align: center;
-            margin: 1rem 0;
+            transition: transform 0.3s ease;
         }
 
-        .testimonial-slider {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 4rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .testimonial {
-            display: none;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .testimonial.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: var(--accent);
-            z-index: 1001;
-            transition: width 0.1s ease;
+        .button:hover {
+            transform: scale(1.05);
         }
 
         @media (max-width: 768px) {
-            .profile {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
+            .content-section {
+                padding: 2rem 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="scroll-progress"></div>
-<nav class="nav">
-    <button class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="comics.html">Comics</a></li>
-        <li><a href="stories.html">Stories</a></li>
-        <li><a href="impact.html">Impact</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
-</nav>
-
-
-    <a href="javascript:history.back()" 
-    style="display: flex; 
-           align-items: center; 
-           padding: 0.75rem 1.25rem;
-           background: var(--primary);
-           color: white;
-           text-decoration: none;
-           border-radius: 25px;
-           box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-           transition: transform 0.3s ease;">
-     ← Back
- </a>
- 
-    <div class="hero">
-        <div>
-            <h1>Storytelling Through Art</h1>
-            <p>Connecting Communities Through Visual Narratives</p>
+    <section class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>About Uganda SDG Comics</h1>
+            <p>Transforming Uganda's sustainable development journey into compelling visual narratives that educate, inspire, and drive action.</p>
         </div>
-    </div>
+    </section>
 
-    <div class="content">
-        <div class="profile" data-aos="fade-up">
-            <div class="profile-image">
-                <img src="/api/placeholder/400/400" alt="Artist Portrait">
+    <section class="content-section">
+        <h2 data-aos="fade-up">Our Mission & Vision</h2>
+        <div class="mission-cards">
+            <div class="mission-card" data-aos="fade-up">
+                <h3>Mission</h3>
+                <p>To harness the power of visual storytelling to make the Sustainable Development Goals accessible, relatable, and actionable for all Ugandans, while preserving and celebrating our rich cultural heritage.</p>
             </div>
-            <div>
-                <h2>The Journey</h2>
-                <p>Growing up in rural Uganda, I witnessed firsthand how stories could bridge divides and inspire change. As a comic artist and visual storyteller, I've dedicated my craft to amplifying voices that often go unheard. My work weaves together traditional storytelling with modern artistic expression, creating narratives that resonate across cultures and generations.</p>
-                <p>Each comic strip is more than just art – it's a window into real lives, real challenges, and real triumphs. Through these visual narratives, we're building a bridge between communities, fostering understanding, and preserving invaluable local knowledge.</p>
+            <div class="mission-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Vision</h3>
+                <p>A Uganda where every citizen understands, embraces, and actively contributes to achieving the Sustainable Development Goals through locally-driven solutions and community engagement.</p>
+            </div>
+            <div class="mission-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Values</h3>
+                <ul>
+                    <li>Cultural Authenticity</li>
+                    <li>Community Empowerment</li>
+                    <li>Inclusive Storytelling</li>
+                    <li>Educational Innovation</li>
+                    <li>Sustainable Impact</li>
+                </ul>
             </div>
         </div>
 
-        <div class="story-grid" data-aos="fade-up">
-            <div class="story-card">
-                <h3>Community Voice</h3>
-                <p>Our comics amplify local voices, sharing authentic stories from rural communities that highlight both challenges and innovative solutions.</p>
-                <div class="impact-counter" data-target="1500">0</div>
-                <p>Stories Collected</p>
+        <h2 data-aos="fade-up">SDGs in Uganda: Our Focus Areas</h2>
+        <div class="sdg-grid">
+            <div class="sdg-item" data-aos="fade-up">
+                <h3>Poverty Reduction</h3>
+                <p>Addressing Uganda's poverty rate through stories of innovative solutions, entrepreneurship, and community-based initiatives.</p>
             </div>
-            <div class="story-card">
-                <h3>Knowledge Preservation</h3>
-                <p>We document traditional farming practices and local wisdom, ensuring valuable knowledge passes to future generations.</p>
-                <div class="impact-counter" data-target="45">0</div>
-                <p>Communities Reached</p>
+            <div class="sdg-item" data-aos="fade-up" data-aos-delay="100">
+                <h3>Quality Education</h3>
+                <p>Highlighting challenges and successes in providing inclusive, quality education across urban and rural Uganda.</p>
             </div>
-            <div class="story-card">
-                <h3>Global Connection</h3>
-                <p>Through visual storytelling, we're building bridges between rural communities and global audiences.</p>
-                <div class="impact-counter" data-target="12000">0</div>
-                <p>Readers Worldwide</p>
+            <div class="sdg-item" data-aos="fade-up" data-aos-delay="200">
+                <h3>Gender Equality</h3>
+                <p>Showcasing stories of women's empowerment and challenging traditional gender roles through compelling narratives.</p>
+            </div>
+            <div class="sdg-item" data-aos="fade-up">
+                <h3>Climate Action</h3>
+                <p>Exploring Uganda's environmental challenges and community-led solutions through engaging storylines.</p>
             </div>
         </div>
 
-        <div class="testimonial-slider" data-aos="fade-up">
-            <div class="testimonial active">
-                <p>"These comics give voice to our community's struggles and triumphs in a way that words alone never could."</p>
-                <cite>- Sarah Namukasa, Community Elder</cite>
+        <h2 data-aos="fade-up">Our Approach to Social Change</h2>
+        <div class="mission-cards">
+            <div class="mission-card" data-aos="fade-up">
+                <h3>Visual Storytelling</h3>
+                <p>Using comics as a powerful medium to break down complex SDG concepts into relatable, engaging stories that resonate with local communities.</p>
             </div>
-            <div class="testimonial">
-                <p>"Through these visual stories, our traditional farming knowledge will live on in the next generation."</p>
-                <cite>- John Mukasa, Local Farmer</cite>
+            <div class="mission-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Community Engagement</h3>
+                <p>Working directly with communities to gather authentic stories, ensure cultural accuracy, and create meaningful impact through our narratives.</p>
             </div>
-            <div class="testimonial">
-                <p>"The impact of these comics extends far beyond entertainment – they're catalysts for real change."</p>
-                <cite>- Dr. Emily Nakato, Agricultural Researcher</cite>
+            <div class="mission-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Educational Integration</h3>
+                <p>Developing comprehensive educational resources that make our comics valuable tools for schools, organizations, and community groups.</p>
             </div>
         </div>
-    </div>
+
+        <h2 data-aos="fade-up">Our Team</h2>
+        <div class="team-grid">
+            <div class="team-member" data-aos="fade-up">
+                <img src="/api/placeholder/400/300" alt="Team Member">
+                <div class="team-info">
+                    <h3>Sarah Namukasa</h3>
+                    <p>Creative Director</p>
+                    <p>Award-winning comic artist with 15 years of experience in visual storytelling for social change.</p>
+                </div>
+            </div>
+            <div class="team-member" data-aos="fade-up" data-aos-delay="100">
+                <img src="/api/placeholder/400/300" alt="Team Member">
+                <div class="team-info">
+                    <h3>John Okello</h3>
+                    <p>SDG Education Specialist</p>
+                    <p>Former UN consultant with expertise in localizing SDGs for Ugandan context.</p>
+                </div>
+            </div>
+            <div class="team-member" data-aos="fade-up" data-aos-delay="200">
+                <img src="/api/placeholder/400/300" alt="Team Member">
+                <div class="team-info">
+                    <h3>Grace Atim</h3>
+                    <p>Community Engagement Lead</p>
+                    <p>Grassroots activist with extensive experience in community mobilization and storytelling.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="partners-section" data-aos="fade-up">
+            <h2>Our Partners</h2>
+            <p>Working together with leading organizations to create lasting impact:</p>
+            <div class="partner-logos">
+                <img src="/api/placeholder/200/100" alt="UNDP Logo">
+                <img src="/api/placeholder/200/100" alt="Ministry of Education Logo">
+                <img src="/api/placeholder/200/100" alt="Uganda Communications Commission Logo">
+                <img src="/api/placeholder/200/100" alt="Comic Artists Association Logo">
+            </div>
+        </div>
+
+        <div class="impact-stats">
+            <div class="stat-box" data-aos="fade-up">
+                <h3>500K+</h3>
+                <p>Readers Reached</p>
+            </div>
+            <div class="stat-box" data-aos="fade-up" data-aos-delay="100">
+                <h3>112</h3>
+                <p>Districts Covered</p>
+            </div>
+            <div class="stat-box" data-aos="fade-up" data-aos-delay="200">
+                <h3>17</h3>
+                <p>SDGs Addressed</p>
+            </div>
+            <div class="stat-box" data-aos="fade-up" data-aos-delay="300">
+                <h3>45+</h3>
+                <p>Partner Organizations</p>
+            </div>
+        </div>
+
+        <div class="cta-section" style="text-align: center; margin-top: 4rem;">
+            <h2>Join Our Mission</h2>
+            <p>Help us create positive change through storytelling.</p>
+            <br>
+            <a href="contribute.html" class="button">Get Involved</a>
+        </div>
+    </section>
 
     <script>
-        // Scroll progress indicator
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.querySelector('.scroll-progress').style.width = scrolled + '%';
-        });
-
-        // Nav background change on scroll
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                document.querySelector('.nav').classList.add('scrolled');
-            } else {
-                document.querySelector('.nav').classList.remove('scrolled');
-            }
-        });
-
-        // Counter animation
-        const counters = document.querySelectorAll('.impact-counter');
-        const speed = 200;
-
-        const animateCounter = (counter) => {
-            const target = +counter.getAttribute('data-target');
-            const count = +counter.innerText;
-            const increment = target / speed;
-
-            if (count < target) {
-                counter.innerText = Math.ceil(count + increment);
-                setTimeout(() => animateCounter(counter), 1);
-            } else {
-                counter.innerText = target;
-            }
-        };
-
-        const observerCallback = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounter(entry.target);
-                    observer.unobserve(entry.target);
-                }
-            });
-        };
-
-        const counterObserver = new IntersectionObserver(observerCallback, {
-            threshold: 0.5
-        });
-
-        counters.forEach(counter => counterObserver.observe(counter));
-
-        // Testimonial slider
-        const testimonials = document.querySelectorAll('.testimonial');
-        let currentTestimonial = 0;
-
-        function showNextTestimonial() {
-            testimonials[currentTestimonial].classList.remove('active');
-            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-            testimonials[currentTestimonial].classList.add('active');
-        }
-
-        setInterval(showNextTestimonial, 5000);
-
-        // Initialize AOS
         AOS.init({
             duration: 800,
-            once: true,
-            offset: 100
+            once: true
         });
     </script>
-        <script src="script.js"></script> <!-- Path to script.js -->
-
 </body>
 </html>
