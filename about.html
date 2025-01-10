@@ -243,8 +243,10 @@ body {
 
 .team-member img {
     width: 100%;
-    height: 300px;
-    object-fit: cover;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    background: var(--neutral-200);
     transition: transform 0.3s ease;
 }
 
@@ -264,10 +266,22 @@ body {
 
 .partner-logos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 2rem;
     align-items: center;
     justify-items: center;
+    padding: 2rem 0;
+}
+
+.partner-logos img {
+    max-width: 150px;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.partner-logos img:hover {
+    transform: scale(1.05);
 }
 
 .impact-stats {
