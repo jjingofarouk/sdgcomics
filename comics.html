@@ -3,32 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stories - Food Security Narratives from Uganda</title>
+    <title>Uganda SDG Stories - Stories for Comic Artists</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         :root {
-            --primary-color: #2c5282;
-            --secondary-color: #4a5568;
-            --accent-color: #48bb78;
-            --background-color: #f7fafc;
-            --text-color: #2d3748;
+            --primary-color: #00689D;
+            --secondary-color: #19486A;
+            --accent-color: #FF9E1B;
+            --background-color: #f5f5f5;
+            --text-color: #333;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
         }
 
         .nav {
+            background-color: var(--primary-color);
+            padding: 1rem;
             position: fixed;
-            top: 0;
             width: 100%;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            top: 0;
             z-index: 1000;
             transition: transform 0.3s ease-in-out;
         }
@@ -38,47 +37,40 @@
         }
 
         .nav ul {
-            display: flex;
             list-style: none;
+            padding: 0;
             margin: 0;
-            padding: 1rem;
+            display: flex;
             justify-content: center;
-        }
-
-        .nav li {
-            margin: 0 1.5rem;
+            gap: 2rem;
         }
 
         .nav a {
-            color: var(--primary-color);
+            color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav a:hover {
-            color: var(--accent-color);
         }
 
         .controls {
-            margin: 6rem auto 2rem;
-            max-width: 1200px;
-            padding: 0 1rem;
+            margin-top: 80px;
+            padding: 2rem;
+            text-align: center;
         }
 
         .search-box {
-            width: 100%;
-            padding: 0.75rem;
+            padding: 0.5rem 1rem;
+            width: 300px;
+            margin-bottom: 1rem;
             border: 2px solid var(--primary-color);
             border-radius: 4px;
-            margin-bottom: 1rem;
-            font-size: 1rem;
         }
 
         .filter-buttons {
             display: flex;
+            justify-content: center;
             gap: 1rem;
             flex-wrap: wrap;
+            margin-bottom: 2rem;
         }
 
         .filter-btn {
@@ -88,47 +80,32 @@
             background-color: var(--secondary-color);
             color: white;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s;
         }
 
         .filter-btn.active {
             background-color: var(--accent-color);
         }
 
-        .content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
-        }
-
         .stories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            padding: 1rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .story-entry {
             background: white;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
         }
 
         .story-entry:hover {
             transform: translateY(-5px);
-        }
-
-        .story-header {
-            height: 200px;
-            background-color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            padding: 1rem;
-            text-align: center;
         }
 
         .story-info {
@@ -136,27 +113,29 @@
         }
 
         .story-info h2 {
-            margin: 0 0 1rem 0;
+            margin: 0 0 1rem;
             color: var(--primary-color);
-        }
-
-        .story-info p {
-            margin: 0 0 1rem 0;
-            line-height: 1.6;
         }
 
         .tags {
             display: flex;
-            flex-wrap: wrap;
             gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
         }
 
         .tag {
             background-color: var(--accent-color);
             color: white;
             padding: 0.25rem 0.75rem;
-            border-radius: 999px;
+            border-radius: 15px;
             font-size: 0.875rem;
+        }
+
+        .sdg-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
         }
 
         .modal {
@@ -164,12 +143,12 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0;
+            bottom: 0;
             background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
             justify-content: center;
             align-items: center;
-            z-index: 2000;
         }
 
         .modal-content {
@@ -180,18 +159,17 @@
             width: 90%;
             max-height: 90vh;
             overflow-y: auto;
-            position: relative;
         }
 
         .close-modal {
             position: absolute;
-            top: 1rem;
             right: 1rem;
+            top: 1rem;
             background: none;
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--secondary-color);
+            color: var(--text-color);
         }
 
         .modal-nav {
@@ -200,27 +178,18 @@
             margin-top: 1rem;
         }
 
-        .prev-story, .next-story {
-            padding: 0.5rem 1rem;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
         @media (max-width: 768px) {
             .nav ul {
                 flex-direction: column;
                 align-items: center;
             }
 
-            .nav li {
-                margin: 0.5rem 0;
+            .filter-buttons {
+                flex-direction: column;
             }
 
-            .stories-grid {
-                grid-template-columns: 1fr;
+            .search-box {
+                width: 100%;
             }
         }
     </style>
@@ -231,7 +200,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="stories.html">Stories</a></li>
-            <li><a href="impact.html">Impact</a></li>
+            <li><a href="submit.html">Submit Story</a></li>
             <li><a href="resources.html">Resources</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -240,89 +209,87 @@
     <div class="controls">
         <input type="text" class="search-box" placeholder="Search stories...">
         <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="all">All Stories</button>
-            <button class="filter-btn" data-filter="personal">Personal Narratives</button>
-            <button class="filter-btn" data-filter="solutions">Solutions & Innovation</button>
-            <button class="filter-btn" data-filter="culture">Cultural Impact</button>
+            <button class="filter-btn active" data-filter="all">All SDGs</button>
+            <button class="filter-btn" data-filter="poverty">No Poverty</button>
+            <button class="filter-btn" data-filter="hunger">Zero Hunger</button>
+            <button class="filter-btn" data-filter="health">Good Health</button>
+            <button class="filter-btn" data-filter="education">Quality Education</button>
+            <button class="filter-btn" data-filter="gender">Gender Equality</button>
+            <button class="filter-btn" data-filter="environment">Environmental</button>
         </div>
     </div>
 
     <div class="content">
         <div class="stories-grid">
-            <div class="story-entry" data-aos="fade-up" data-tags="personal,community">
-                <div class="story-header">
-                    <h2>The Harvest Keepers</h2>
-                </div>
+            <div class="story-entry" data-aos="fade-up" data-tags="education,gender">
                 <div class="story-info">
-                    <p>In the heart of Karamoja, Sarah Akello leads a women's cooperative transforming traditional storage methods into a sustainable food security solution. Her story captures the essence of community resilience and indigenous knowledge in addressing SDG 2.</p>
+                    <div class="sdg-number">SDG 4 & 5</div>
+                    <h2>The Bicycle Scholar</h2>
+                    <p>Sarah Namukasa, a young girl from Mbale, transforms her community by starting a bicycle-sharing initiative that helps rural students reach their schools. Her innovation has increased girls' school attendance by 45% in her district.</p>
                     <div class="tags">
-                        <span class="tag">Personal Narrative</span>
-                        <span class="tag">Community Action</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="story-entry" data-aos="fade-up" data-aos-delay="100" data-tags="solutions,innovation">
-                <div class="story-header">
-                    <h2>Digital Fields</h2>
-                </div>
-                <div class="story-info">
-                    <p>Following young entrepreneurs in Kampala who are revolutionizing urban farming through mobile technology. Their innovative approach to vertical farming and resource management is creating new possibilities for food security in urban spaces.</p>
-                    <div class="tags">
-                        <span class="tag">Solutions</span>
+                        <span class="tag">Education</span>
+                        <span class="tag">Gender Equality</span>
                         <span class="tag">Innovation</span>
                     </div>
                 </div>
             </div>
 
-            <div class="story-entry" data-aos="fade-up" data-aos-delay="200" data-tags="culture,community">
-                <div class="story-header">
-                    <h2>Seeds of Memory</h2>
-                </div>
+            <div class="story-entry" data-aos="fade-up" data-tags="hunger,innovation">
                 <div class="story-info">
-                    <p>An exploration of how traditional seed banking in Western Uganda is preserving biodiversity and cultural heritage. Through the eyes of elder Mukasa John, we witness the intersection of indigenous knowledge and food sovereignty.</p>
+                    <div class="sdg-number">SDG 2</div>
+                    <h2>The Vertical Gardens of Kampala</h2>
+                    <p>Follow Joshua Mukisa's journey of transforming urban food production in Kampala's informal settlements through innovative vertical gardening techniques, now feeding over 200 families.</p>
                     <div class="tags">
-                        <span class="tag">Cultural Heritage</span>
-                        <span class="tag">Community</span>
+                        <span class="tag">Zero Hunger</span>
+                        <span class="tag">Urban Agriculture</span>
                     </div>
                 </div>
             </div>
 
-            <div class="story-entry" data-aos="fade-up" data-aos-delay="300" data-tags="solutions,innovation">
-                <div class="story-header">
-                    <h2>Tomorrow's Harvest</h2>
-                </div>
+            <div class="story-entry" data-aos="fade-up" data-tags="health,poverty">
                 <div class="story-info">
-                    <p>A deep dive into climate-smart agriculture initiatives in Eastern Uganda, where farmers are adapting to changing weather patterns through innovative farming techniques and community-based weather monitoring systems.</p>
+                    <div class="sdg-number">SDG 1 & 3</div>
+                    <h2>Mobile Clinic Revolution</h2>
+                    <p>Dr. Agnes Atim's mobile clinic initiative in Northern Uganda brings healthcare to remote villages, serving over 1,000 patients monthly and creating employment for local youth as health workers.</p>
                     <div class="tags">
-                        <span class="tag">Solutions</span>
-                        <span class="tag">Innovation</span>
+                        <span class="tag">Healthcare</span>
+                        <span class="tag">Poverty Reduction</span>
                     </div>
                 </div>
             </div>
 
-            <div class="story-entry" data-aos="fade-up" data-aos-delay="400" data-tags="personal,culture">
-                <div class="story-header">
-                    <h2>Market Chronicles</h2>
-                </div>
+            <div class="story-entry" data-aos="fade-up" data-tags="environment,innovation">
                 <div class="story-info">
-                    <p>Through the eyes of market vendor Maria in Mbale, we explore how local food systems are adapting to modern challenges while maintaining cultural connections. Her story reveals the complex web of relationships that sustain community food security.</p>
+                    <div class="sdg-number">SDG 13 & 15</div>
+                    <h2>Forest Guardians of Bwindi</h2>
+                    <p>The inspiring story of former poachers turned conservation leaders who now protect Bwindi's mountain gorillas while developing eco-tourism opportunities for their community.</p>
                     <div class="tags">
-                        <span class="tag">Personal Narrative</span>
-                        <span class="tag">Cultural Impact</span>
+                        <span class="tag">Climate Action</span>
+                        <span class="tag">Conservation</span>
                     </div>
                 </div>
             </div>
 
-            <div class="story-entry" data-aos="fade-up" data-aos-delay="500" data-tags="solutions,community">
-                <div class="story-header">
-                    <h2>Growing Together</h2>
-                </div>
+            <div class="story-entry" data-aos="fade-up" data-tags="gender,poverty">
                 <div class="story-info">
-                    <p>The transformative story of the Gulu Community Farm Project, where former refugees are building food security through collaborative farming. Their journey highlights the power of community-driven solutions in post-conflict regions.</p>
+                    <div class="sdg-number">SDG 5 & 8</div>
+                    <h2>Craft Queens Collective</h2>
+                    <p>How a group of women in Gulu transformed traditional craft-making into a successful fair-trade enterprise, now employing over 50 women and exporting globally.</p>
                     <div class="tags">
-                        <span class="tag">Solutions</span>
-                        <span class="tag">Community Action</span>
+                        <span class="tag">Women Empowerment</span>
+                        <span class="tag">Economic Growth</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-entry" data-aos="fade-up" data-tags="education,innovation">
+                <div class="story-info">
+                    <div class="sdg-number">SDG 4 & 9</div>
+                    <h2>Solar Powered Learning</h2>
+                    <p>The remarkable journey of a rural school in Tororo that implemented solar-powered tablets and interactive learning, improving student performance by 60% in just one year.</p>
+                    <div class="tags">
+                        <span class="tag">Education</span>
+                        <span class="tag">Technology</span>
                     </div>
                 </div>
             </div>
@@ -336,8 +303,8 @@
             <p></p>
             <div class="tags"></div>
             <div class="modal-nav">
-                <button class="prev-story">Previous Story</button>
-                <button class="next-story">Next Story</button>
+                <button class="prev-comic">Previous Story</button>
+                <button class="next-comic">Next Story</button>
             </div>
         </div>
     </div>
@@ -356,8 +323,8 @@
         const modal = document.querySelector('.modal');
         const modalContent = modal.querySelector('.modal-content');
         const closeModal = modal.querySelector('.close-modal');
-        const prevButton = modal.querySelector('.prev-story');
-        const nextButton = modal.querySelector('.next-story');
+        const prevButton = modal.querySelector('.prev-comic');
+        const nextButton = modal.querySelector('.next-comic');
 
         let currentStoryIndex = 0;
         let visibleStories = [];
@@ -413,13 +380,14 @@
         });
 
         function showModal(story) {
-            const title = story.querySelector('h2').textContent;
-            const description = story.querySelector('p').textContent;
-            const tags = story.querySelector('.tags').innerHTML;
+            const title = story.querySelector('h2');
+            const description = story.querySelector('p');
+            const tags = story.querySelector('.tags');
+            const sdgNumber = story.querySelector('.sdg-number');
 
-            modalContent.querySelector('h2').textContent = title;
-            modalContent.querySelector('p').textContent = description;
-            modalContent.querySelector('.tags').innerHTML = tags;
+            modalContent.querySelector('h2').textContent = title.textContent;
+            modalContent.querySelector('p').textContent = description.textContent;
+            modalContent.querySelector('.tags').innerHTML = tags.innerHTML;
 
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -432,10 +400,155 @@
             nextButton.style.visibility = currentStoryIndex < visibleStories.length - 1 ? 'visible' : 'hidden';
         }
 
-        // Close modal
         closeModal.addEventListener('click', () => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
 
-        modal.
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentStoryIndex > 0) {
+                currentStoryIndex--;
+                showModal(visibleStories[currentStoryIndex]);
+            }
+        });
+
+      nextButton.addEventListener('click', () => {
+        if (currentStoryIndex < visibleStories.length - 1) {
+            currentStoryIndex++;
+            showModal(visibleStories[currentStoryIndex]);
+        }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (modal.style.display === 'flex') {
+            if (e.key === 'Escape') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            } else if (e.key === 'ArrowLeft' && currentStoryIndex > 0) {
+                currentStoryIndex--;
+                showModal(visibleStories[currentStoryIndex]);
+            } else if (e.key === 'ArrowRight' && currentStoryIndex < visibleStories.length - 1) {
+                currentStoryIndex++;
+                showModal(visibleStories[currentStoryIndex]);
+            }
+        }
+    });
+
+    // Navigation scroll functionality
+    const nav = document.querySelector('.nav');
+    let lastScroll = 0;
+
+    // Hide navigation on scroll down, show on scroll up
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+        
+        if (currentScroll <= 0) {
+            nav.classList.remove('hidden');
+            return;
+        }
+        
+        if (currentScroll > lastScroll && !nav.classList.contains('hidden')) {
+            // Scrolling down
+            nav.classList.add('hidden');
+        } else if (currentScroll < lastScroll && nav.classList.contains('hidden')) {
+            // Scrolling up
+            nav.classList.remove('hidden');
+        }
+        
+        lastScroll = currentScroll;
+    });
+
+    // Handle mobile nav menu clicks
+    document.querySelectorAll('.nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                nav.classList.remove('active');
+            }
+        });
+    });
+
+    // Close modal when clicking outside
+    document.addEventListener('click', (e) => {
+        if (modal.style.display === 'flex' && !modalContent.contains(e.target)) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Initialize filters on page load
+    filterStories();
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        AOS.refresh();
+    });
+
+    // Add touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    modalContent.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    modalContent.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const swipeDistance = touchEndX - touchStartX;
+
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0 && currentStoryIndex > 0) {
+                // Swipe right - show previous
+                currentStoryIndex--;
+                showModal(visibleStories[currentStoryIndex]);
+            } else if (swipeDistance < 0 && currentStoryIndex < visibleStories.length - 1) {
+                // Swipe left - show next
+                currentStoryIndex++;
+                showModal(visibleStories[currentStoryIndex]);
+            }
+        }
+    }
+
+    // Add loading state for dynamic content
+    const setLoading = (loading) => {
+        const loadingElement = document.querySelector('.loading');
+        if (loading) {
+            loadingElement.style.display = 'block';
+        } else {
+            loadingElement.style.display = 'none';
+        }
+    };
+
+    // Handle errors gracefully
+    window.addEventListener('error', (e) => {
+        console.error('An error occurred:', e.error);
+        // You could add user-friendly error messaging here
+    });
+
+    // Ensure smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            const element = document.querySelector(anchor.getAttribute('href'));
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>
