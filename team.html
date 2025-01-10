@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - Uganda SDG Comics</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        :root {
+            --primary: #19486A;
+            --secondary: #26BDE2;
+            --text: #333;
+            --background: #F5F7FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(25, 72, 106, 0.9), rgba(25, 72, 106, 0.9)), url('/api/placeholder/1920/1080');
+            color: white;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .member-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: 2rem;
+        }
+
+        .member-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .member-social a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .department {
+            margin: 4rem 0;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .quote-section {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .quote {
+            max-width: 800px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <h1>Meet Our Team</h1>
+        <p>The passionate individuals bringing Uganda's SDG stories to life</p>
+    </section>
+
+    <div class="content">
+        <section class="leadership" data-aos="fade-up">
+            <h2>Leadership Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="/api/placeholder/400/350" alt="Sarah Namukasa" class="member-image">
+                    <div class="member-info">
+                        <h3>Sarah Namukasa</h3>
+                        <h4>Creative Director & Founder</h4>
+                        <p>A pioneer in using comics for social change, Sarah has spent 15 years working at the intersection of visual storytelling and development. Her work has been recognized by the UN and various international organizations.</p>
+                        <div class="member-social">
+                            <a href="#">LinkedIn</a>
+                            <a href="#">Twitter</a>
+                            <a href="#">Portfolio</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="/api/placeholder/400/350" alt="John Okello" class="member-image">
+                    <div class="member-info">
+                        <h3>John Okello</h3>
+                        <h4>SDG Education Director</h4>
+                        <p>Former UN consultant with expertise in localizing SDGs. John has worked across East Africa developing educational programs and has been instrumental in creating our SDG curriculum.</p>
+                        <div class="member-social">
+                            <a href="#">LinkedIn</a>
+                            <a href="#">Twitter</a>
+                            <a href="#">Publications</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="/api/placeholder/400/350" alt="Grace Atim" class="member-image">
+                    <div class="member-info">
+                        <h3>Grace Atim</h3>
+                        <h4>Community Engagement Lead</h4>
+                        <p>With over a decade of experience in community mobilization, Grace ensures our stories authentically represent local voices and experiences. She leads our grassroots partnerships and story collection initiatives.</p>
+                        <div class="member-social">
+                            <a href="#">LinkedIn</a>
+                            <a href="#">Twitter</a>
+                            <a href="#">Blog</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="department" data-aos="fade-up">
+            <h2>Creative Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="/api/placeholder/400/350" alt="David Mugisha" class="member-image">
+                    <div class="member-info">
+                        <h3>David Mugisha</h3>
+                        <h4>Lead Artist</h4>
+                        <p>Award-winning comic artist specializing in African storytelling styles. David brings our characters to life with his unique blend of traditional and contemporary artistic elements.</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="/api/placeholder/400/350" alt="Patricia Nambi" class="member-image">
+                    <div class="member-info">
+                        <h3>Patricia Nambi</h3>
+                        <h4>Story Development Lead</h4>
+                        <p>Former journalist turned storyteller, Patricia ensures our narratives are both compelling and culturally authentic while addressing key SDG themes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="department" data-aos="fade-up">
+            <h2>Education & Impact Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="/api/placeholder/400/350" alt="Moses Kibuuka" class="member-image">
+                    <div class="member-info">
+                        <h3>Moses Kibuuka</h3>
+                        <h4>Education Programs Manager</h4>
+                        <p>Former teacher with expertise in curriculum development, Moses leads the creation of educational resources and teacher training programs.</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="/api/placeholder/400/350" alt="Florence Akello" class="member-image">
+                    <div class="member-info">
+                        <h3>Florence Akello</h3>
+                        <h4>Impact Assessment Lead</h4>
+                        <p>Research specialist focusing on measuring and evaluating the impact of our comics on SDG awareness and community action.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="department" data-aos="fade-up">
+            <h2>Community Outreach Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="/api/placeholder/400/350" alt="Ibrahim Ssemakula" class="member-image">
+                    <div class="member-info">
+                        <h3>Ibrahim Ssemakula</h3>
+                        <h4>Regional Coordinator - Central</h4>
+                        <p>Coordinates community engagement and story collection across central Uganda, specializing in urban community mobilization.</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="/api/placeholder/400/350" alt="Joy Achan" class="member-image">
+                    <div class="member-info">
+                        <h3>Joy Achan</h3>
+                        <h4>Regional Coordinator - Northern</h4>
+                        <p>Leads our northern Uganda initiatives, focusing on post-conflict development stories and community healing through storytelling.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quote-section" data-aos="fade-up">
+            <div class="quote">
+                <h2>"Our team's diversity is our strength. Each member brings unique experiences and perspectives that help us tell authentic, impactful stories about Uganda's sustainable development journey."</h2>
+                <p>- Sarah Namukasa, Creative Director</p>
+            </div>
+        </section>
+
+        <section class="join-us" data-aos="fade-up">
+            <h2>Join Our Team</h2>
+            <p>We're always looking for passionate individuals to join our mission. Check out our current opportunities:</p>
+            <ul style="margin: 2rem 0;">
+                <li>Community Story Collectors (Various Regions)</li>
+                <li>Comic Artists and Illustrators</li>
+                <li>Education Content Developers</li>
+                <li>SDG Research Associates</li>
+            </ul>
+            <a href="careers.html" style="color: var(--primary); font-weight: bold;">View Open Positions →</a>
+        </section>
+    </div>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+</html>
