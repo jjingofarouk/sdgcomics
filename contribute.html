@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contribute - Uganda's SDG Stories</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        :root {
+            --primary: #19486A;
+            --secondary: #26BDE2;
+            --text: #333;
+            --background: #F5F7FA;
+            --success: #4CAF50;
+            --warning: #FFC107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        .nav {
+            background: var(--primary);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            padding: 0 1rem;
+            list-style: none;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .hero {
+            padding-top: 80px;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .ways-to-help {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .help-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .help-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .help-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .form-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .partner-logos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .partner-logo {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+        }
+
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonials {
+            margin: 2rem 0;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About SDGs</a></li>
+            <li><a href="stories.html">Stories</a></li>
+            <li><a href="characters.html">Characters</a></li>
+            <li><a href="impact.html">Impact</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>Join Our Mission</h1>
+        <p>Support sustainable development through storytelling</p>
+    </section>
+
+    <div class="content">
+        <div class="ways-to-help" data-aos="fade-up">
+            <div class="help-card">
+                <div class="help-icon">📖</div>
+                <h3>Share Your Story</h3>
+                <p>Have a sustainable development story from your community? Share it with us and inspire others.</p>
+                <a href="#story-form" class="button">Submit Story</a>
+            </div>
+
+            <div class="help-card">
+                <div class="help-icon">💝</div>
+                <h3>Make a Donation</h3>
+                <p>Support our comic creation, translation, and distribution efforts across Uganda.</p>
+                <a href="#donate" class="button">Donate Now</a>
+            </div>
+
+            <div class="help-card">
+                <div class="help-icon">🤝</div>
+                <h3>Partner With Us</h3>
+                <p>Collaborate with us to expand our reach and impact in sustainable development.</p>
+                <a href="#partnership" class="button">Become a Partner</a>
+            </div>
+        </div>
+
+        <section id="story-form" class="form-section" data-aos="fade-up">
+            <h2>Submit Your Story</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="sdg">Related SDG</label>
+                    <select id="sdg" required>
+                        <option value="">Select an SDG</option>
+                        <option value="sdg1">SDG 1: No Poverty</option>
+                        <option value="sdg2">SDG 2: Zero Hunger</option>
+                        <option value="sdg3">SDG 3: Good Health and Well-being</option>
+                        <option value="sdg4">SDG 4: Quality Education</option>
+                        <option value="sdg5">SDG 5: Gender Equality</option>
+                        <option value="sdg6">SDG 6: Clean Water and Sanitation</option>
+                        <option value="sdg7">SDG 7: Affordable and Clean Energy</option>
+                        <option value="sdg8">SDG 8: Decent Work and Economic Growth</option>
+                        <option value="sdg9">SDG 9: Industry, Innovation and Infrastructure</option>
+                        <option value="sdg10">SDG 10: Reduced Inequalities</option>
+                        <option value="sdg11">SDG 11: Sustainable Cities and Communities</option>
+                        <option value="sdg12">SDG 12: Responsible Consumption and Production</option>
+                        <option value="sdg13">SDG 13: Climate Action</option>
+                        <option value="sdg14">SDG 14: Life Below Water</option>
+                        <option value="sdg15">SDG 15: Life on Land</option>
+                        <option value="sdg16">SDG 16: Peace, Justice and Strong Institutions</option>
+                        <option value="sdg17">SDG 17: Partnerships for the Goals</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="story">Your Story</label>
+                    <textarea id="story" rows="6" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="media">Upload Photos (optional)</label>
+                    <input type="file" id="media" accept="image/*" multiple>
+                </div>
+
+                <button type="submit" class="button">Submit Story</button>
+            </form>
+        </section>
+
+        <section id="donate" class="form-section" data-aos="fade-up">
+            <h2>Support Our Work</h2>
+            <p>Your donation helps us create and distribute educational comics about sustainable development across Uganda.</p>
+            
+            <div class="impact-stats">
+                <div class="stat-card">
+                    <h3>5,000+</h3>
+                    <p>Comics Distributed</p>
+                </div>
+                <div class="stat-card">
+                    <h3>120+</h3>
+                    <p>Schools Reached</p>
+                </div>
+                <div class="stat-card">
+                    <h3>15,000+</h3>
+                    <p>Students Impacted</p>
+                </div>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label for="amount">Donation Amount (USD)</label>
+                    <select id="amount">
+                        <option value="10">$10 - Sponsor 10 comics</option>
+                        <option value="25">$25 - Sponsor 25 comics</option>
+                        <option value="50">$50 - Sponsor a school distribution</option>
+                        <option value="100">$100 - Sponsor comic creation</option>
+                        <option value="custom">Custom amount</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="button">Proceed to Payment</button>
+            </form>
+        </section>
+
+        <section id="partnership" class="form-section" data-aos="fade-up">
+            <h2>Partnership Opportunities</h2>
+            <p>Join our network of partners making sustainable development accessible through storytelling.</p>
+
+            <div class="ways-to-help">
+                <div class="help-card">
+                    <h3>Distribution Partners</h3>
+                    <p>Help us reach more communities with our educational comics.</p>
+                </div>
+
+                <div class="help-card">
+                    <h3>Content Partners</h3>
+                    <p>Collaborate on story development and technical accuracy.</p>
+                </div>
+
+                <div class="help-card">
+                    <h3>Technology Partners</h3>
+                    <p>Support our digital platforms and accessibility initiatives.</p>
+                </div>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label for="org-name">Organization Name</label>
+                    <input type="text" id="org-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-person">Contact Person</label>
+                    <input type="text" id="contact-person" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="partnership-type">Partnership Type</label>
+                    <select id="partnership-type" required>
+                        <option value="">Select partnership type</option>
+                        <option value="distribution">Distribution Partner</option>
+                        <option value="content">Content Partner</option>
+                        <option value="technology">Technology Partner</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="proposal">Partnership Proposal</label>
+                    <textarea id="proposal" rows="6" required></textarea>
+                </div>
+
+                <button type="submit" class="button">Submit Proposal</button>
+            </form>
+        </section>
+
+        <section class="testimonials" data-aos="fade-up">
+            <h2>Partner Testimonials</h2>
+            <div class="testimonial-card">
+                <p>"Working with the SDG Stories team has helped us reach thousands of students with important sustainability messages in an engaging format."</p>
+                <strong>- Sarah Mukasa, Education Director, Green Schools Initiative</strong>
+            </div>
+            <div class="testimonial-card">
+                <p>"The comics have been an invaluable tool in our community development work, making complex SDG concepts accessible to everyone."</p>
+                <strong>- John Okello, Community Development Officer, Rural Empowerment Network</strong>
+            </div>
+        </section>
+
+        <section class="partner-logos" data-aos="fade-up">
+            <div class="partner-logo">
+                <img src="/api/placeholder/150/100" alt="Partner 1">
+            </div>
+            <div class="partner-logo">
+                <img src="/api/placeholder/150/100" alt="Partner 2">
+            </div>
+            <div class="partner-logo">
+                <img src="/api/placeholder/150/100" alt="Partner 3">
+            </div>
+            <div class="partner-logo">
+                <img src="/api/placeholder/150/100" alt="Partner 4">
+            </div>
+        </section>
+    </div>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+          });
+
+        // Form handling
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Show submission feedback
+                const button = form.querySelector('button[type="submit"]');
+                const originalText = button.textContent;
+                button.textContent = 'Submitting...';
+                
+                // Simulate form submission (replace with actual API call)
+                setTimeout(() => {
+                    button.textContent = 'Submitted Successfully!';
+                    button.style.backgroundColor = 'var(--success)';
+                    form.reset();
+                    
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.backgroundColor = 'var(--secondary)';
+                    }, 3000);
+                }, 1500);
+            });
+        });
+
+        // Custom amount handling for donations
+        const amountSelect = document.getElementById('amount');
+        if (amountSelect) {
+            amountSelect.addEventListener('change', (e) => {
+                if (e.target.value === 'custom') {
+                    const customInput = document.createElement('input');
+                    customInput.type = 'number';
+                    customInput.min = '1';
+                    customInput.placeholder = 'Enter custom amount';
+                    customInput.className = 'form-control';
+                    customInput.style.marginTop = '1rem';
+                    
+                    const existingCustomInput = amountSelect.parentElement.querySelector('input[type="number"]');
+                    if (!existingCustomInput) {
+                        amountSelect.parentElement.appendChild(customInput);
+                    }
+                } else {
+                    const customInput = amountSelect.parentElement.querySelector('input[type="number"]');
+                    if (customInput) {
+                        customInput.remove();
+                    }
+                }
+            });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 100;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // File upload preview
+        const mediaInput = document.getElementById('media');
+        if (mediaInput) {
+            mediaInput.addEventListener('change', function(e) {
+                const files = Array.from(e.target.files);
+                const existingPreview = document.querySelector('.file-preview');
+                if (existingPreview) {
+                    existingPreview.remove();
+                }
+
+                if (files.length > 0) {
+                    const previewContainer = document.createElement('div');
+                    previewContainer.className = 'file-preview';
+                    previewContainer.style.marginTop = '1rem';
+                    previewContainer.style.display = 'flex';
+                    previewContainer.style.gap = '1rem';
+                    previewContainer.style.flexWrap = 'wrap';
+
+                    files.forEach(file => {
+                        if (file.type.startsWith('image/')) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                const preview = document.createElement('div');
+                                preview.style.width = '100px';
+                                preview.style.height = '100px';
+                                preview.style.backgroundImage = `url(${e.target.result})`;
+                                preview.style.backgroundSize = 'cover';
+                                preview.style.backgroundPosition = 'center';
+                                preview.style.borderRadius = '5px';
+                                previewContainer.appendChild(preview);
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+
+                    mediaInput.parentElement.appendChild(previewContainer);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
