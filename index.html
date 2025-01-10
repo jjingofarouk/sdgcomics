@@ -26,33 +26,50 @@
             line-height: 1.6;
             color: var(--text);
             background: var(--background);
+            padding-top: 70px;
         }
 
         .nav {
             background: var(--primary);
-            padding: 1rem;
+            padding: 0.5rem;
             position: fixed;
             width: 100%;
             top: 0;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             z-index: 1000;
         }
 
-        .nav.hidden {
-            transform: translateY(-100%);
+        .nav.scrolled {
+            padding: 0.3rem;
+            background: rgba(25, 72, 106, 0.95);
+            backdrop-filter: blur(10px);
         }
 
-        .nav ul {
+        .nav-container {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            gap: 2rem;
+            justify-content: space-between;
+            align-items: center;
             padding: 0 1rem;
+        }
+
+        .nav-logo {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1001;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
             list-style: none;
         }
 
-        .nav a {
+        .nav-menu a {
             color: white;
             text-decoration: none;
             font-weight: 500;
@@ -61,11 +78,69 @@
             transition: all 0.2s ease;
         }
 
-        .nav a:hover {
+        .nav-menu a:hover {
             background: rgba(255,255,255,0.1);
             transform: translateY(-1px);
         }
 
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: white;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 100%;
+                max-width: 300px;
+                background: var(--primary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 1.5rem;
+                transition: right 0.3s ease;
+                padding: 2rem;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .nav-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+        }
+
+        /* Rest of your existing styles remain the same */
         .hero {
             min-height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/api/placeholder/1920/1080');
@@ -78,7 +153,9 @@
             padding: 2rem;
             color: white;
             position: relative;
+            margin-top: -70px;
         }
+
 
         .hero-content {
             max-width: 1000px;
@@ -189,15 +266,23 @@
 </head>
 <body>
     <nav class="nav">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About SDGs</a></li>
-            <li><a href="comics.html">Stories</a></li>
-            <li><a href="characters.html">Characters</a></li>
-            <li><a href="impact.html">Impact</a></li>
-            <li><a href="contribute.html">Contribute</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">SDG Stories</a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About SDGs</a></li>
+                <li><a href="comics.html">Stories</a></li>
+                <li><a href="characters.html">Characters</a></li>
+                <li><a href="impact.html">Impact</a></li>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
     <section class="hero">
@@ -281,12 +366,47 @@
         <a href="contribute.html" class="button">Share Your Story</a>
     </section>
 
-    <script>
+   <script>
+        // Initialize AOS
         AOS.init({
             duration: 800,
             once: true
         });
 
+        // Navigation toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const nav = document.querySelector('.nav');
+        let lastScroll = 0;
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Scroll behavior
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            // Add scrolled class for visual changes
+            if (currentScroll > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Your existing CountUp code remains the same
         const options = {
             duration: 2.5,
             useGrouping: true,
