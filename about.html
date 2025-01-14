@@ -241,17 +241,74 @@ body {
     transform: translateY(-5px);
 }
 
+.team-member {
+    position: relative;
+    width: 100%;
+    max-width: 300px; /* Limit maximum width */
+    margin: 0 auto;
+}
+
+.team-member-image-container {
+    aspect-ratio: 1 / 1; /* Force square container */
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--neutral-200);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .team-member img {
     width: 100%;
-    height: auto;
-    max-height: none;
-    object-fit: contain;
-    background: var(--neutral-200);
+    height: 100%;
+    object-fit: cover; /* Changed from contain to cover for better circle filling */
     transition: transform 0.3s ease;
 }
 
+/* Smooth hover effect */
+.team-member:hover .team-member-image-container {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
 .team-member:hover img {
-    transform: scale(1.05);
+    transform: scale(1.08);
+}
+
+/* Optional border effect */
+.team-member-image-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.team-member:hover .team-member-image-container::after {
+    border-color: var(--primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .team-member {
+        max-width: 250px; /* Slightly smaller on mobile */
+    }
+}
+
+/* Optional loading animation */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.team-member {
+    animation: fadeInScale 0.3s ease-out forwards;
 }
 
 .team-info {
