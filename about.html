@@ -264,65 +264,133 @@ body {
     margin: 4rem 0;
 }
 
+.partners-section {
+    background: var(--neutral-100);
+    padding: 2rem 1rem;  /* Reduced padding for mobile */
+    margin: 2rem 0;
+}
+
+@media (min-width: 768px) {
+    .partners-section {
+        padding: 4rem 2rem;  /* Restore original padding on desktop */
+        margin: 4rem 0;
+    }
+}
+
 .partner-logos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);  /* 2 columns on mobile */
+    gap: 1.5rem;  /* Smaller gap for mobile */
     align-items: center;
     justify-items: center;
-    padding: 2rem 0;
+    padding: 1.5rem 0;
+    max-width: 1200px;  /* Prevent too wide scaling */
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .partner-logos {
+        grid-template-columns: repeat(4, 1fr);  /* 4 columns on desktop */
+        gap: 2rem;
+        padding: 2rem 0;
+    }
 }
 
 .partner-logos img {
-    max-width: 150px;
+    width: 100%;  /* Make images responsive */
+    max-width: 120px;  /* Slightly reduced from 150px */
     height: auto;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;  /* Slightly faster transition */
 }
 
 .partner-logos img:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);  /* Subtler scale effect */
 }
 
 .impact-stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
+    grid-template-columns: 1fr;  /* Single column on mobile */
+    gap: 1rem;  /* Reduced gap for mobile */
     text-align: center;
-    margin: 4rem 0;
+    margin: 2rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .impact-stats {
+        grid-template-columns: repeat(2, 1fr);  /* 2 columns on tablet */
+        gap: 2rem;
+        margin: 4rem 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .impact-stats {
+        grid-template-columns: repeat(4, 1fr);  /* 4 columns on desktop */
+    }
 }
 
 .stat-box {
     background: var(--primary);
     color: var(--neutral-100);
-    padding: 2rem;
-    border-radius: 10px;
+    padding: 1.5rem;  /* Slightly reduced padding */
+    border-radius: 8px;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 160px;  /* Ensure consistent height */
+    backdrop-filter: blur(8px);  /* Add frosted glass effect */
 }
 
 .stat-box::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    inset: 0;  /* Modern replacement for top/right/bottom/left */
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease;
+    z-index: 1;
 }
 
 .stat-box:hover::before {
-    opacity: 1;
+    opacity: 0.15;  /* Subtler gradient effect */
+}
+
+.stat-box > * {
+    position: relative;
+    z-index: 2;  /* Ensure content stays above gradient */
 }
 
 .stat-box h3 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    position: relative;
-    z-index: 1;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);  /* Responsive font size */
+    margin-bottom: 0.75rem;
+    font-weight: 700;
 }
+
+/* Add smooth loading animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.stat-box {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Improve performance */
+.stat-box {
+    will-change: transform;
+    transform: translateZ(0);  /* Force GPU acceleration */
+}
+
 
 .button {
     display: inline-block;
